@@ -6,6 +6,8 @@ import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class EventService {
@@ -29,5 +31,15 @@ public class EventService {
         log.info("Created event: [{}]", result);
 
         return result;
+    }
+
+    public List<EventDTO> findAllEvents() {
+        var result = eventRepository.findAll();
+        log.debug("Result: [{}]", result);
+        log.info("Number of read events: [{}]", result.size());
+        return result
+                .stream()
+                .map(eventConverter::fromEntityToDto)
+                .toList();
     }
 }
