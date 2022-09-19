@@ -22,7 +22,7 @@ public class ConfigController {
 
     @GetMapping()
     public InitialConfig provideInitialConfig() {
-        log.info("provide initial config method was called");
+        log.info("Provide initial config method was called");
         return configService.getInitialConfig();
     }
 }
