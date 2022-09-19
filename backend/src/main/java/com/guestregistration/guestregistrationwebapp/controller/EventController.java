@@ -21,7 +21,7 @@ public class EventController {
 
     @PostMapping
     public EventDTO createNewPost(@RequestBody EventDTO toStore) {
-        log.info("trying to store new post: [{}]", toStore);
+        log.info("Trying to store new post: [{}]", toStore);
         return eventService.createNewEvent(toStore);
     }
 

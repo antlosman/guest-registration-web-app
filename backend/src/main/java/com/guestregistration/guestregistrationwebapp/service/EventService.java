@@ -22,13 +22,13 @@ public class EventService {
 
     public EventDTO createNewEvent(EventDTO toStore) {
 
-        log.info("Creating new Event: [{}]", toStore);
+        log.info("Creating new Event... [{}]", toStore);
 
         var entity = eventConverter.fromDtoToEntity(toStore);
         eventRepository.save(entity);
         var result = eventConverter.fromEntityToDto(entity);
 
-        log.info("Created event: [{}]", result);
+        log.info("New event successfully created: [{}]", result);
 
         return result;
     }
