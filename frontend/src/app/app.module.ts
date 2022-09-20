@@ -8,11 +8,13 @@ import { FutureEventsComponent } from './components/future-events/future-events.
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {CdkTableModule} from "@angular/cdk/table";
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     WelcomeComponent,
-    FutureEventsComponent
+    FutureEventsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
