@@ -9,6 +9,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {CdkTableModule} from "@angular/cdk/table";
 import { HeaderComponent } from './components/header/header.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatCardModule,
-    CdkTableModule
+    CdkTableModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [WelcomeComponent]
