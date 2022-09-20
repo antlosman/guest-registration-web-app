@@ -1,0 +1,9 @@
+table {
+  width: 50%;
+}
+
+.table-name {
+  text-align: center;
+  color: white;
+  background-color: #0059a1;
+}
