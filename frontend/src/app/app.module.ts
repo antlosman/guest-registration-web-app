@@ -8,11 +8,15 @@ import { FutureEventsComponent } from './components/future-events/future-events.
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {CdkTableModule} from "@angular/cdk/table";
+import { HeaderComponent } from './components/header/header.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
     WelcomeComponent,
-    FutureEventsComponent
+    FutureEventsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,9 @@ import {CdkTableModule} from "@angular/cdk/table";
     BrowserAnimationsModule,
     MatTableModule,
     MatCardModule,
-    CdkTableModule
+    CdkTableModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [WelcomeComponent]
