@@ -1,0 +1,44 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px;
+  max-width: 76.8%;
+  margin-left: 10%;
+  background-color: #373738;
+  margin-bottom: 30px;
+  padding-bottom: 150px;
+  color: white;
+}
+
+.footer-rows {
+
+}
+
+
+.mat-toolbar-row {
+  justify-content: center;
+
+}
+
+
+
+.homepage-button {
+  background-color: #0059a1;
+  color: white;
+  padding: 21px;
+  border: white;
+  text-align: center;
+  margin-left: 120px;
+  box-shadow: 4px 4px 4px #999;
+}
+
+.add-event-button {
+  background-color: white;
+  padding: 21px;
+  border: white;
+  margin-left: 10px;
+  box-shadow: 4px 4px 4px #999;
+}
