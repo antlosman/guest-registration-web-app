@@ -11,12 +11,14 @@ import {CdkTableModule} from "@angular/cdk/table";
 import { HeaderComponent } from './components/header/header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
+import { PastEventsComponent } from './components/past-events/past-events.component';
 
 @NgModule({
   declarations: [
     WelcomeComponent,
     FutureEventsComponent,
-    HeaderComponent
+    HeaderComponent,
+    PastEventsComponent
   ],
   imports: [
     BrowserModule,

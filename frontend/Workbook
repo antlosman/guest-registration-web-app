@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+
+  <span>
+    <img src="pictures/logo.svg" class="angular-logo">
+  </span>
+  <span class="fill-remaining-space"></span>
+
+  <button mat-button>Home page</button>
+  <button mat-button>Add new event</button>
+
+</mat-toolbar>
+
+This part is from welcome component. Read the applicationName.
+<div class="center">
+  <h1>Welcome to {{applicationName}}</h1>
+</div>
