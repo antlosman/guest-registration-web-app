@@ -2,3 +2,19 @@
   display: flex;
   justify-content: center;
 }
+
+.box-with-text {
+  display: inline-block;
+  background-color: #0059a1;
+  color: white;
+  padding-bottom: 280px;
+  padding-right: 785px;
+  margin-left: 10%;
+  padding-top: 20px;
+}
+
+.homepage-image-right {
+  margin-left: 1050px;
+  margin-top: -400px;
+  padding-bottom: 15px;
+}

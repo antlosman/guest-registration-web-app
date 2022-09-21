@@ -1,5 +1,8 @@
 table {
-  width: 50%;
+  width: 38%;
+  float: left;
+  margin-right: 15px;
+  margin-left: 10%;
 }
 
 .table-name {

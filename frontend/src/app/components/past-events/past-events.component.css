@@ -1,0 +1,10 @@
+table {
+  width: 38%;
+  float: left;
+}
+
+.table-name {
+  text-align: center;
+  color: white;
+  background-color: #0059a1;
+}
