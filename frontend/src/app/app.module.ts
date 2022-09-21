@@ -12,13 +12,15 @@ import { HeaderComponent } from './components/header/header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import { PastEventsComponent } from './components/past-events/past-events.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     WelcomeComponent,
     FutureEventsComponent,
     HeaderComponent,
-    PastEventsComponent
+    PastEventsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
