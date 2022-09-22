@@ -13,6 +13,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import { PastEventsComponent } from './components/past-events/past-events.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { EventFormComponent } from './components/event-form/event-form.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './components/footer/footer.component';
     FutureEventsComponent,
     HeaderComponent,
     PastEventsComponent,
-    FooterComponent
+    FooterComponent,
+    EventFormComponent
   ],
   imports: [
     BrowserModule,
