@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-event-form',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventFormComponent implements OnInit {
 
-  constructor() { }
+  eventForm = this.formBuilder.group({
+    name: [''],
+    date: [''],
+    participantsQuantity: ['']
+  })
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }

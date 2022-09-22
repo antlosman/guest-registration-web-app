@@ -14,6 +14,8 @@ import {MatIconModule} from "@angular/material/icon";
 import { PastEventsComponent } from './components/past-events/past-events.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
+import {MatButtonModule} from "@angular/material/button";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { EventFormComponent } from './components/event-form/event-form.component
     MatCardModule,
     CdkTableModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [WelcomeComponent]
