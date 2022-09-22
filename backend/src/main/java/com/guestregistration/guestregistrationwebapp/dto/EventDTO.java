@@ -1,10 +1,12 @@
 package com.guestregistration.guestregistrationwebapp.dto;
 
 
+import java.time.LocalDate;
+
 public record EventDTO(
         Long id,
         String name,
-        String date,
+        LocalDate date,
         int participantsQuantity
 ) {
 }

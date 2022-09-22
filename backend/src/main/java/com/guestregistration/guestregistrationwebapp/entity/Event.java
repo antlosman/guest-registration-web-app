@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import java.time.LocalDate;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
@@ -27,7 +29,7 @@ public class Event {
 
     private String name;
 
-    private String  date;
+    private LocalDate date;
 
     private int participantsQuantity;
 
