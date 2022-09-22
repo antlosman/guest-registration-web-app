@@ -11,25 +11,6 @@ export class FutureEventsService {
 
   constructor(private http: HttpClient) { }
 
-  // This method gets all events without date comparing
-  // getFutureEvents(): Observable<Array<Event>> {
-  //   this.http.get<any>(BACKEND_FUTURE_EVENTS)
-  //     .pipe(
-  //       tap(value => console.log("Data before processing: " + JSON.stringify(value))),
-  //       map((value: Array<any>) =>
-  //         value.map(item =>
-  //           <Event> {
-  //         id: item.id,
-  //         name: item.name,
-  //         date: item.date,
-  //         participantsQuantity: item.participantsQuantity
-  //       })),
-  //       tap(value => console.log("Data after processing: " + JSON.stringify(value)))
-  //     ).subscribe();
-  //
-  //   return this.http.get<Array<Event>>(BACKEND_FUTURE_EVENTS)
-  // }
-
   getFutureEvents(): Observable<Array<Event>> {
     this.http.get<any>(BACKEND_FUTURE_EVENTS)
       .pipe(

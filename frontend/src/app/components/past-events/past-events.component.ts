@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FutureEventsService} from "../../services/future-events.service";
+import {PastEventsServiceService} from "../../services/past-events-service.service";
 import {Event} from "../../models/event";
 
 
@@ -12,11 +12,11 @@ export class PastEventsComponent implements OnInit {
 
   futureEvents: Array<Event> = []
 
-  constructor(private futureEventsService: FutureEventsService) { }
+  constructor(private pastEventService: PastEventsServiceService) { }
 
   ngOnInit(): void {
-    this.futureEventsService
-      .getFutureEvents()
+    this.pastEventService
+      .getPastEvents()
       .subscribe(value => {this.futureEvents = value});
   }
 
