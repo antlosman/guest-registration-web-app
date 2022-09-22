@@ -6,6 +6,7 @@ import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -35,6 +36,16 @@ public class EventService {
 
     public List<EventDTO> findAllEvents() {
         var result = eventRepository.findAll();
+        log.debug("Result: [{}]", result);
+        log.info("Number of read events: [{}]", result.size());
+        return result
+                .stream()
+                .map(eventConverter::fromEntityToDto)
+                .toList();
+    }
+
+    public List<EventDTO> findAllEventsBeforeToday() {
+        var result = eventRepository.findAllByDateBefore(LocalDate.now());
         log.debug("Result: [{}]", result);
         log.info("Number of read events: [{}]", result.size());
         return result
