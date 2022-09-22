@@ -53,4 +53,14 @@ public class EventService {
                 .map(eventConverter::fromEntityToDto)
                 .toList();
     }
+
+    public List<EventDTO> findAllEventsAfterToday() {
+        var result = eventRepository.findAllByDateAfter(LocalDate.now());
+        log.debug("Result: [{}]", result);
+        log.info("Number of read events: [{}]", result.size());
+        return result
+                .stream()
+                .map(eventConverter::fromEntityToDto)
+                .toList();
+    }
 }

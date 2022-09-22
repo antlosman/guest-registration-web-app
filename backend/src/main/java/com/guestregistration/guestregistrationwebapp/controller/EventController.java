@@ -36,4 +36,10 @@ public class EventController {
         log.info("Reading events before today...");
         return eventService.findAllEventsBeforeToday();
     }
+
+    @GetMapping("read-all-events-after-today")
+    public List<EventDTO> readAllEventsAfterToday() {
+        log.info("Reading events after today...");
+        return eventService.findAllEventsAfterToday();
+    }
 }
