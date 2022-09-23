@@ -17,6 +17,7 @@ import { EventFormComponent } from './components/event-form/event-form.component
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule, Routes} from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {path: 'homepage', component: HomeComponent},
@@ -44,7 +45,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [WelcomeComponent]

@@ -11,7 +11,14 @@ export class EventFormService {
   constructor(private http: HttpClient) { }
 
   createNewEvent(newEvent: Event) {
-    console.log(`Trying to send to backend new event: [${newEvent}]`)
-    this.http.post(BACKEND_CREATE_EVENT, newEvent)
+    let payload = {
+      id: newEvent.id,
+      name: newEvent.name,
+      date: newEvent.date,
+      participantsQuantity: newEvent.participantsQuantity
+    }
+    console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+    this.http.post(BACKEND_CREATE_EVENT, payload).subscribe()
   }
+
 }

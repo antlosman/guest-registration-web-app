@@ -1,1 +1,15 @@
-<p>event-form works!</p>
+<form [formGroup]="eventForm" (ngSubmit)="onFormSubmit()"> <!--here we're binding our post form-->
+  <p>Creating new event</p>
+  <label for="name">Event Name</label>
+  <input id="name" type="text" formControlName="name"><br><br>
+
+  <label for="date">Event date</label>
+  <input id="date" type="text" formControlName="date"><br><br>
+
+  <label for="participantsQuantity">Participants</label>
+  <input id="participantsQuantity" type="text" formControlName="participantsQuantity"><br><br>
+
+  <!-- If post form is not filled correctly the button is disabled. -->
+  <button [disabled]="!eventForm.valid" type="submit" mat-raised-button>Create post</button><br><br>
+
+</form>
