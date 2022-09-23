@@ -8,13 +8,7 @@ import {FormBuilder} from "@angular/forms";
 })
 export class EventFormComponent implements OnInit {
 
-  eventForm = this.formBuilder.group({
-    name: [''],
-    date: [''],
-    participantsQuantity: ['']
-  })
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -15,7 +15,14 @@ import { PastEventsComponent } from './components/past-events/past-events.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
 import {MatButtonModule} from "@angular/material/button";
-import {RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
+import { HomeComponent } from './components/home/home.component';
+
+const routes: Routes = [
+  {path: 'homepage', component: HomeComponent},
+  {path: 'add-event', component: EventFormComponent},
+  {path: '', component: HomeComponent}
+];
 
 @NgModule({
   declarations: [
@@ -24,7 +31,8 @@ import {RouterModule} from "@angular/router";
     HeaderComponent,
     PastEventsComponent,
     FooterComponent,
-    EventFormComponent
+    EventFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,7 @@ import {RouterModule} from "@angular/router";
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [WelcomeComponent]

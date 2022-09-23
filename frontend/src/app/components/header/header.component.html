@@ -1,17 +1,6 @@
-
-  <mat-toolbar class="header">
-
-    <img src="assets/logo.svg" class="logo">
-
-    <button id="homepage" type="button" mat-button (click)="clicked = true" class="homepage-button">
-      Homepage
-    </button>
-
-    <button id="add-event" type="button" mat-button (click)="clicked = true" class="add-event-button">
-      Add new event
-    </button>
-
-    <img src="assets/symbol.svg" class="symbol">
-
-  </mat-toolbar>
-
+<mat-toolbar>
+  <img src="assets/logo.svg" class="logo">
+  <a mat-button routerLink="homepage">Homepage</a>
+  <a mat-button routerLink="add-event">Add event</a>
+  <img src="assets/symbol.svg" class="symbol">
+</mat-toolbar>
