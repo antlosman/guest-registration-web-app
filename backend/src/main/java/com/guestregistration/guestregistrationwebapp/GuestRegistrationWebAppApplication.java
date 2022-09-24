@@ -10,4 +10,5 @@ public class GuestRegistrationWebAppApplication {
         SpringApplication.run(GuestRegistrationWebAppApplication.class, args);
     }
 
+
 }

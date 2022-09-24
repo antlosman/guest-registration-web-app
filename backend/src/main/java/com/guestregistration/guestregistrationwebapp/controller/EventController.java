@@ -19,6 +19,7 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    // TODO: change method name to createNewEvent
     @PostMapping
     public EventDTO createNewPost(@RequestBody EventDTO toStore) {
         log.info("Trying to store new post: [{}]", toStore);
@@ -27,7 +28,7 @@ public class EventController {
 
     @GetMapping("/read-all-events")
     public List<EventDTO> readAllEvents() {
-        log.info("Reading recent events...");
+        log.info("Reading all events...");
         return eventService.findAllEvents();
     }
 
