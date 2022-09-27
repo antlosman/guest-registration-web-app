@@ -62,11 +62,20 @@ public class EventController {
             @PathVariable Long privateClientID
     ) {
         log.info("Trying to add private client to event...");
-        Event event = eventRepository.findById(eventID).get();
-        PrivateClient privateClient = privateClientRepository.findById(privateClientID).get();
-        event.getEventPrivateClients().add(privateClient);
-        return eventRepository.save(event);
+        return eventService.addPrivateClientToEvent(eventID, privateClientID);
     }
+
+//    @PutMapping("/{eventID}/private-clients/{privateClientID}")
+//    public Event assignPrivateClientToEvent(
+//            @PathVariable Long eventID,
+//            @PathVariable Long privateClientID
+//    ) {
+//        log.info("Trying to add private client to event...");
+//        Event event = eventRepository.findById(eventID).get();
+//        PrivateClient privateClient = privateClientRepository.findById(privateClientID).get();
+//        event.getEventPrivateClients().add(privateClient);
+//        return eventRepository.save(event);
+//    }
 
     @GetMapping("/findEventById/{eventID}")
     public Optional<Event> findEventById(

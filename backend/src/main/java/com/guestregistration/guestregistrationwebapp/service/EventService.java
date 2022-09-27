@@ -3,7 +3,7 @@ package com.guestregistration.guestregistrationwebapp.service;
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.converter.PrivateClientConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
-import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
+import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -73,6 +73,13 @@ public class EventService {
                 .toList();
     }
 
+    public Event addPrivateClientToEvent(Long eventId, Long privateClientId) {
+
+        var event = eventRepository.findById(eventId).get();
+        var privateClient = privateClientRepository.findById(privateClientId).get();
+        event.getEventPrivateClients().add(privateClient);
+        return eventRepository.save(event);
+    }
 
 //    public EventDTO addPrivateClientToEvent(Long eventId, Long privateClientId) {
 //
