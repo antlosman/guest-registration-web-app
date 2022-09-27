@@ -71,11 +71,17 @@ public class EventService {
     }
 
     public Event addPrivateClientToEvent(Long eventId, Long privateClientId) {
-
+        log.debug("Adding new private client to event...");
         var event = eventRepository.findById(eventId).get();
         var privateClient = privateClientRepository.findById(privateClientId).get();
         event.getEventPrivateClients().add(privateClient);
+        log.info("New private client successfully added to event: [{}]", event);
         return eventRepository.save(event);
     }
+
+//    public EventDTO findEventById(Long eventId) {
+//        var event = eventRepository.findById(eventId);
+//        eventConverter.fromEntityToDto(event);
+//    }
 
 }

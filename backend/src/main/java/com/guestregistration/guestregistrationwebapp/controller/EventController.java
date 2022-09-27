@@ -3,12 +3,10 @@ package com.guestregistration.guestregistrationwebapp.controller;
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
-import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
 import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,17 +20,17 @@ public class EventController {
 
     private final EventService eventService;
 
-    @Autowired
-    EventConverter eventConverter;
+    private final EventConverter eventConverter;
 
-    @Autowired
-    EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    @Autowired
-    PrivateClientRepository privateClientRepository;
+    private final PrivateClientRepository privateClientRepository;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, EventConverter eventConverter, EventRepository eventRepository, PrivateClientRepository privateClientRepository) {
         this.eventService = eventService;
+        this.eventConverter = eventConverter;
+        this.eventRepository = eventRepository;
+        this.privateClientRepository = privateClientRepository;
     }
 
     // TODO: change method name to createNewEvent
@@ -73,7 +71,7 @@ public class EventController {
         return eventConverter.fromEntityToDto(event);
     }
 
-
+    // TODO: do I need a service for this endpoint?
     @GetMapping("/findEventById/{eventID}")
     public Optional<Event> findEventById(
             @PathVariable Long eventID
