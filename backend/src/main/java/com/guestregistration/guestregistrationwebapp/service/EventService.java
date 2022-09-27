@@ -3,9 +3,11 @@ package com.guestregistration.guestregistrationwebapp.service;
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.converter.PrivateClientConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
+import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +75,8 @@ public class EventService {
                 .toList();
     }
 
+
+    // working method...
     public Event addPrivateClientToEvent(Long eventId, Long privateClientId) {
 
         var event = eventRepository.findById(eventId).get();
@@ -81,28 +85,4 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-//    public EventDTO addPrivateClientToEvent(Long eventId, Long privateClientId) {
-//
-//        log.info("Adding new Private client to Event...");
-//        var event = eventRepository.findById(eventId).get();
-//        var privateClient = privateClientRepository.findById(privateClientId).get();
-//        event.getEventPrivateClients().add(privateClient);
-//        eventRepository.save(event);
-//        return event;
-//    }
 }
-
-/*
-public EventDTO addPrivateClientToEvent(EventDTO eventDTO, PrivateClientDTO privateClientDTO) {
-        log.info("Adding new Private client to Event... [{}]", eventDTO);
-        var EventEntity = eventConverter.fromDtoToEntity(eventDTO);
-        eventRepository.findById(EventEntity.getId());
-        var PrivateClientEntity = privateClientConverter.fromDtoToEntity(privateClientDTO);
-        privateClientRepository.findById(PrivateClientEntity.getId());
-        EventEntity.getEventPrivateClients().add(PrivateClientEntity);
-        eventRepository.save(EventEntity);
-        var result = eventConverter.fromEntityToDto(EventEntity);
-        log.info("New private client successfully added to event: [{}]", result);
-        return result;
-    }
- */

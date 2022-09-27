@@ -1,5 +1,6 @@
 package com.guestregistration.guestregistrationwebapp.controller;
 
+import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class EventController {
 
     private final EventService eventService;
+
+    @Autowired
+    EventConverter eventConverter;
 
     @Autowired
     EventRepository eventRepository;
@@ -57,25 +61,18 @@ public class EventController {
     }
 
     @PutMapping("/{eventID}/private-clients/{privateClientID}")
-    public Event assignPrivateClientToEvent(
+    public EventDTO assignPrivateClientToEvent(
             @PathVariable Long eventID,
             @PathVariable Long privateClientID
+            //@RequestBody EventDTO eventDTO
     ) {
         log.info("Trying to add private client to event...");
-        return eventService.addPrivateClientToEvent(eventID, privateClientID);
+
+        //Event event = eventConverter.fromDtoToEntity(eventDTO);
+        Event event = eventService.addPrivateClientToEvent(eventID, privateClientID);
+        return eventConverter.fromEntityToDto(event);
     }
 
-//    @PutMapping("/{eventID}/private-clients/{privateClientID}")
-//    public Event assignPrivateClientToEvent(
-//            @PathVariable Long eventID,
-//            @PathVariable Long privateClientID
-//    ) {
-//        log.info("Trying to add private client to event...");
-//        Event event = eventRepository.findById(eventID).get();
-//        PrivateClient privateClient = privateClientRepository.findById(privateClientID).get();
-//        event.getEventPrivateClients().add(privateClient);
-//        return eventRepository.save(event);
-//    }
 
     @GetMapping("/findEventById/{eventID}")
     public Optional<Event> findEventById(
