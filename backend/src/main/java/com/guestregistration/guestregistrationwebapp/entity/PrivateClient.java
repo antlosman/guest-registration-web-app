@@ -1,14 +1,17 @@
 package com.guestregistration.guestregistrationwebapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -33,4 +36,8 @@ public class PrivateClient {
     private String paymentMethod;
 
     private String additionalInfo;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "eventPrivateClients", cascade = CascadeType.ALL)
+    private List<Event> events = new ArrayList<>();
 }
