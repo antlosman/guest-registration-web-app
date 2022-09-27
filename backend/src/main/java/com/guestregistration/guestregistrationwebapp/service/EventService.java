@@ -1,13 +1,10 @@
 package com.guestregistration.guestregistrationwebapp.service;
 
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
-import com.guestregistration.guestregistrationwebapp.converter.PrivateClientConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
-import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +20,11 @@ public class EventService {
 
     private final PrivateClientRepository privateClientRepository;
 
-    private final PrivateClientConverter privateClientConverter;
 
-    public EventService(EventRepository eventRepository, EventConverter eventConverter, PrivateClientRepository clientRepository, PrivateClientConverter privateClientConverter) {
+    public EventService(EventRepository eventRepository, EventConverter eventConverter, PrivateClientRepository clientRepository) {
         this.eventRepository = eventRepository;
         this.eventConverter = eventConverter;
         this.privateClientRepository = clientRepository;
-        this.privateClientConverter = privateClientConverter;
     }
 
     public EventDTO createNewEvent(EventDTO toStore) {
@@ -75,8 +70,6 @@ public class EventService {
                 .toList();
     }
 
-
-    // working method...
     public Event addPrivateClientToEvent(Long eventId, Long privateClientId) {
 
         var event = eventRepository.findById(eventId).get();
