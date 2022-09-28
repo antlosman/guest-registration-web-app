@@ -7,10 +7,13 @@ import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @Slf4j
@@ -22,15 +25,9 @@ public class EventController {
 
     private final EventConverter eventConverter;
 
-    private final EventRepository eventRepository;
-
-    private final PrivateClientRepository privateClientRepository;
-
-    public EventController(EventService eventService, EventConverter eventConverter, EventRepository eventRepository, PrivateClientRepository privateClientRepository) {
+    public EventController(EventService eventService, EventConverter eventConverter) {
         this.eventService = eventService;
         this.eventConverter = eventConverter;
-        this.eventRepository = eventRepository;
-        this.privateClientRepository = privateClientRepository;
     }
 
     // TODO: change method name to createNewEvent
@@ -66,17 +63,16 @@ public class EventController {
     ) {
         log.info("Trying to add private client to event...");
 
-        //Event event = eventConverter.fromDtoToEntity(eventDTO);
         Event event = eventService.addPrivateClientToEvent(eventID, privateClientID);
         return eventConverter.fromEntityToDto(event);
     }
 
-    // TODO: do I need a service for this endpoint?
+
     @GetMapping("/findEventById/{eventID}")
-    public Optional<Event> findEventById(
+    public ResponseEntity<EventDTO> findEventById(
             @PathVariable Long eventID
     ) {
         log.info("Trying to find event by id...");
-        return eventRepository.findById(eventID);
+        return status(HttpStatus.OK).body(eventService.getEvent(eventID));
     }
 }

@@ -8,6 +8,7 @@ import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRep
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -79,9 +80,10 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-//    public EventDTO findEventById(Long eventId) {
-//        var event = eventRepository.findById(eventId);
-//        eventConverter.fromEntityToDto(event);
-//    }
+    public EventDTO getEvent(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(id.toString()));
+        return eventConverter.fromEntityToDto(event);
+    }
 
 }

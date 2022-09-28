@@ -17,12 +17,13 @@ import { EventFormComponent } from './components/event-form/event-form.component
 import { MatButtonModule } from "@angular/material/button";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ParticipantsComponent } from './components/participants/participants.component';
 
 const routes: Routes = [
   {path: 'homepage', component: HomeComponent},
   {path: 'add-event', component: EventFormComponent},
+  {path: 'futureEvent/:id', component: ParticipantsComponent},
   {path: '', component: HomeComponent}
 ];
 
@@ -48,7 +49,8 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [WelcomeComponent]

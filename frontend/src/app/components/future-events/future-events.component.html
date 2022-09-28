@@ -26,7 +26,7 @@
   <!-- Participants button Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> actions </th>
-    <td mat-cell *matCellDef="let row"> <a mat-button [routerLink]="['/add-event']">Add event</a> </td>
+    <td mat-cell *matCellDef="let element"> <a mat-button [routerLink]="['/futureEvent/'+element.id]">participants</a> </td>
   </ng-container>
 
   <ng-container matColumnDef="grouped">

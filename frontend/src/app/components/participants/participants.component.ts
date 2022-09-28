@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { EventParticipantsService } from "../../services/event-participants.service";
+import { Event } from "../../models/event";
+import {ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: 'app-participants',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParticipantsComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  eventId: any;
+  event: Event | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private eventParticipantsService: EventParticipantsService,
+  ) {
   }
 
+  ngOnInit(): void {
+    this.eventId = this.route.snapshot.params['id']
+    this.getEventByID();
+  }
+
+  getEventByID() {
+    this.eventParticipantsService.getEventById(this.eventId).subscribe( data =>
+    {
+      this.event = data;
+      console.log(this.event)
+    })
+  }
 }
