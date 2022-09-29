@@ -13,7 +13,7 @@ export class ParticipantsComponent implements OnInit {
 
 
   eventId: any;
-  event: Event | undefined;
+  event: any;
 
   constructor(
     private route: ActivatedRoute,
