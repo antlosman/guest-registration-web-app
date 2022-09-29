@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -80,10 +81,9 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public EventDTO getEvent(Long id) {
-        Event event = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(id.toString()));
-        return eventConverter.fromEntityToDto(event);
+    public Optional<Event> getEvent(Long id) {
+        return eventRepository.findById(id);
     }
+
 
 }

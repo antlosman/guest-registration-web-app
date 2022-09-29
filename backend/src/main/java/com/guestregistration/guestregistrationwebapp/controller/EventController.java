@@ -3,17 +3,12 @@ package com.guestregistration.guestregistrationwebapp.controller;
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
-import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
-import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.http.ResponseEntity.status;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -67,12 +62,13 @@ public class EventController {
         return eventConverter.fromEntityToDto(event);
     }
 
-
     @GetMapping("/findEventById/{eventID}")
-    public ResponseEntity<EventDTO> findEventById(
+    public Optional<Event> findEventById(
             @PathVariable Long eventID
     ) {
         log.info("Trying to find event by id...");
-        return status(HttpStatus.OK).body(eventService.getEvent(eventID));
+        return eventService.getEvent(eventID);
     }
+
+
 }
