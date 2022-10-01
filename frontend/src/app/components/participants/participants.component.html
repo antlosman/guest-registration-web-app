@@ -20,4 +20,34 @@
     <td>test</td>
   </tr>
   </tbody>
+
+  <p>{{event.eventPrivateClients | json}}</p>
+  <tbody>
+  <tr *ngFor="let item of event.eventPrivateClients">
+    <td *ngFor="let each of item | keyvalue"> {{each.value}} </td>
+  </tr>
+  </tbody>
+
 </table>
+
+<form [formGroup]="eventForm" (ngSubmit)="onFormSubmit()"> <!--here we're binding our post form-->
+  <p>Creating new event</p>
+  <label for="firstName">First name</label>
+  <input id="firstName" type="text" formControlName="firstName"><br><br>
+
+  <label for="lastName">Last name</label>
+  <input id="lastName" type="text" formControlName="lastName"><br><br>
+
+  <label for="idNumber">Id number</label>
+  <input id="idNumber" type="text" formControlName="idNumber"><br><br>
+
+  <label for="paymentMethod">paymentMethod</label>
+  <input id="paymentMethod" type="text" formControlName="paymentMethod"><br><br>
+
+  <label for="additionalInfo">additionalInfo</label>
+  <input id="additionalInfo" type="text" formControlName="additionalInfo"><br><br>
+
+  <!-- If post form is not filled correctly the button is disabled. -->
+  <button [disabled]="!eventForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+
+</form>

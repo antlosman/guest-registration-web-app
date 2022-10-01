@@ -5,12 +5,13 @@ import com.guestregistration.guestregistrationwebapp.service.PrivateClientServic
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
 @Slf4j
 @RequestMapping("private-clients")
-@CrossOrigin("${allowed.origin.url")
+@CrossOrigin
 public class PrivateClientController {
 
     private final PrivateClientService privateClientService;

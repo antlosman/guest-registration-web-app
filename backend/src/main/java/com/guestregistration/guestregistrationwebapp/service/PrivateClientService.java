@@ -29,12 +29,12 @@ public class PrivateClientService {
         log.info("Creating new Private Client... [{}]", toStore);
 
         var entity = privateClientConverter.fromDtoToEntity(toStore);
-        privateClientRepository.save(entity);
-        var result = privateClientConverter.fromEntityToDto(entity);
+        var dbentity = privateClientRepository.save(entity);
+        var result = privateClientConverter.fromEntityToDto(dbentity);
 
         log.info("New Private Client successfully created: [{}]", result);
 
-        return toStore;
+        return result;
     }
 
     public List<PrivateClientDTO> findAllPrivateClients() {

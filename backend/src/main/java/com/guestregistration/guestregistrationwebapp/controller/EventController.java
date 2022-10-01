@@ -2,8 +2,10 @@ package com.guestregistration.guestregistrationwebapp.controller;
 
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
+import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
+import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +22,12 @@ public class EventController {
 
     private final EventConverter eventConverter;
 
-    public EventController(EventService eventService, EventConverter eventConverter) {
+    private final PrivateClientService privateClientService;
+
+    public EventController(EventService eventService, EventConverter eventConverter, PrivateClientService privateClientService) {
         this.eventService = eventService;
         this.eventConverter = eventConverter;
+        this.privateClientService = privateClientService;
     }
 
     // TODO: change method name to createNewEvent
@@ -70,5 +75,10 @@ public class EventController {
         return eventService.getEvent(eventID);
     }
 
+    @PostMapping("/private-client")
+    public PrivateClientDTO createNewPrivateClient(@RequestBody PrivateClientDTO toStore) {
+        log.info("Trying to store new private client: [{}]", toStore);
+        return privateClientService.createNewPrivateClient(toStore);
+    }
 
 }
