@@ -29,8 +29,8 @@ public class PrivateClientService {
         log.info("Creating new Private Client... [{}]", toStore);
 
         var entity = privateClientConverter.fromDtoToEntity(toStore);
-        var dbentity = privateClientRepository.save(entity);
-        var result = privateClientConverter.fromEntityToDto(dbentity);
+        var dbEntity = privateClientRepository.save(entity);
+        var result = privateClientConverter.fromEntityToDto(dbEntity);
 
         log.info("New Private Client successfully created: [{}]", result);
 

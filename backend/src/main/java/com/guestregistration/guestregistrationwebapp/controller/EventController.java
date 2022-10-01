@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @RequestMapping("/events")
-@CrossOrigin("${allowed.origin.url}")
+@CrossOrigin
 public class EventController {
 
     private final EventService eventService;

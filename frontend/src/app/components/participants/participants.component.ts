@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventParticipantsService } from "../../services/event-participants.service";
-import { Event } from "../../models/event";
-import {ActivatedRoute} from "@angular/router";
-import {PrivateClient} from "../../models/privateClient";
-import {FormBuilder} from "@angular/forms";
-import {EventFormService} from "../../services/event-form.service";
-
+import { ActivatedRoute } from "@angular/router";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-participants',
@@ -15,16 +11,13 @@ import {EventFormService} from "../../services/event-form.service";
 export class ParticipantsComponent implements OnInit {
 
 
-  eventId!: number;
-
+  eventId: any;
   event: any;
-
 
   constructor(
     private route: ActivatedRoute,
     private eventParticipantsService: EventParticipantsService,
     private formBuilder: FormBuilder,
-    private eventService: EventFormService
   ) {
   }
 
@@ -41,8 +34,7 @@ export class ParticipantsComponent implements OnInit {
     })
   }
 
-
-  eventForm = this.formBuilder.group({
+  privateClientForm = this.formBuilder.group({
     firstName: [''],
     lastName: [''],
     idNumber: [''],
@@ -50,23 +42,22 @@ export class ParticipantsComponent implements OnInit {
     additionalInfo: ['']
   })
 
-
   onFormSubmit() {
     console.log("On submitting whole post...")
-    console.log(`Value from form: [${JSON.stringify(this.eventForm.value)}]`)
+    console.log(`Value from form: [${JSON.stringify(this.privateClientForm.value)}]`)
 
     let event: any = {
-      firstName: this.eventForm.value.firstName,
-      lastName: this.eventForm.value.lastName,
-      idNumber: this.eventForm.value.idNumber,
-      paymentMethod: this.eventForm.value.paymentMethod,
-      additionalInfo: this.eventForm.value.additionalInfo
+      firstName: this.privateClientForm.value.firstName,
+      lastName: this.privateClientForm.value.lastName,
+      idNumber: this.privateClientForm.value.idNumber,
+      paymentMethod: this.privateClientForm.value.paymentMethod,
+      additionalInfo: this.privateClientForm.value.additionalInfo
     }
 
     this.eventParticipantsService.createNewPrivateClient(event).subscribe((data => {
 
       console.log(data)
-        this.eventParticipantsService.mapping(this.eventId, data.id).subscribe((data => {
+        this.eventParticipantsService.mapping(this.eventId, data.id).subscribe(( _data => {
 
             console.log(this.event)
           })

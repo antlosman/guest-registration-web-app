@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // provides us just a data in a json format, it will help us to provide InitialConfig to frontend as json
+@RestController
 @Slf4j
 @RequestMapping("/config")
 @CrossOrigin("*")
