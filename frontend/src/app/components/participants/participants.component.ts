@@ -12,8 +12,10 @@ import {ActivatedRoute} from "@angular/router";
 export class ParticipantsComponent implements OnInit {
 
 
-  eventId: any;
-  event: any;
+  eventId!: number;
+
+  event!: Event;
+
 
   constructor(
     private route: ActivatedRoute,
