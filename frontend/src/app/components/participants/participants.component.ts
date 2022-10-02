@@ -8,8 +8,10 @@ import { FormBuilder } from "@angular/forms";
   templateUrl: './participants.component.html',
   styleUrls: ['./participants.component.css']
 })
+
 export class ParticipantsComponent implements OnInit {
 
+  displayedColumns: string[] = ['firstName', 'lastName', 'idNumber'];
 
   eventId: any;
   event: any;

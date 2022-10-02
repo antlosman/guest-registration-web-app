@@ -16,18 +16,110 @@ This part is from welcome component. Read the applicationName.
 </div>
 
 
-change/date-type-to-string
-----------------------------------------------------------------------
-1. entity - string to date
-2. dto - string to date
-3. post - test create new event with date patter "2023-01-01"
+
+------------------------------------------------------------------------------------------------------------------------
+The way I got access to event participants
+
+<p></p>
+<p>{{event.eventPrivateClients | json}}</p>
+<tbody>
+
+<tr *ngFor="let item of event.eventPrivateClients">
+  <td *ngFor="let each of item | keyvalue"> {{each.value}} </td>
+</tr>
+</tbody>
+
+------------------------------------------------------------------------------------------------------------------------
+
++12516505966
+
+------------------------------------------------------------------------------------------------------------------------
+welcome.component.css
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.box-with-text {
+  display: inline-block;
+  background-color: #0059a1;
+  color: white;
+  padding-bottom: 280px;
+  padding-right: 785px;
+  margin-left: 10%;
+  padding-top: 20px;
+}
+
+.homepage-image-right {
+  margin-left: 1050px;
+  margin-top: -400px;
+  padding-bottom: 15px;
+}
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+home.component.css
+
+.box-with-text {
+  display: inline-block;
+  background-color: #0059a1;
+  color: white;
+  padding-bottom: 280px;
+  padding-right: 785px;
+  margin-left: 10%;
+  padding-top: 20px;
+}
+
+.homepage-image-right {
+  margin-left: 1050px;
+  margin-top: -400px;
+  padding-bottom: 15px;
+}
+------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------------------------
+style.css:
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #eef2f5 }
+------------------------------------------------------------------------------------------------------------------------
 
 
 
+------------------------------------------------------------------------------------------------------------------------
+future.event.css:
+
+table {
+  width: 38%;
+  float: left;
+  margin-right: 15px;
+  margin-left: 10%;
+}
+
+.table-name {
+  text-align: center;
+  color: white;
+  background-color: #0059a1;
+}
+------------------------------------------------------------------------------------------------------------------------
 
 
+------------------------------------------------------------------------------------------------------------------------
+past.event.css:
 
-        создается событие - 22/09/2022
+table {
+  width: 38%;
+  float: left;
+}
 
-        если дата события до 22/09/2022 - то это прошлое собитые
-        если дата события после 22/09/2022 - то это будущие собитые
+.table-name {
+  text-align: center;
+  color: white;
+  background-color: #0059a1;
+}
+------------------------------------------------------------------------------------------------------------------------
+
+
+<label for="additionalInfo">additionalInfo:</label>
+  <input id="additionalInfo" type="text" formControlName="additionalInfo" size="30"><br><br>

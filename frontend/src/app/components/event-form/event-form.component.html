@@ -1,15 +1,20 @@
+
+
+<div class="test">
 <form [formGroup]="eventForm" (ngSubmit)="onFormSubmit()">
-  <p>Creating new event</p>
-  <label for="name">Event Name</label>
-  <input id="name" type="text" formControlName="name"><br><br>
+  <h1>Add event</h1>
+  <label for="name">Event name:</label>
+  <input id="name" type="text" formControlName="name" size="30"><br><br>
 
-  <label for="date">Event date</label>
-  <input id="date" type="text" formControlName="date"><br><br>
 
-  <label for="participantsQuantity">Participants</label>
-  <input id="participantsQuantity" type="text" formControlName="participantsQuantity"><br><br>
+  <label for="date">Event date:</label>
+  <input id="date" type="text" formControlName="date" size="30"><br><br>
+
+  <label for="participantsQuantity">Participants:</label>
+  <input id="participantsQuantity" type="text" formControlName="participantsQuantity" size="30"><br><br>
 
   <!-- If post form is not filled correctly the button is disabled. -->
-  <button [disabled]="!eventForm.valid" type="submit" mat-raised-button>Create post</button><br><br>
-
+  <button [disabled]="!eventForm.valid" type="submit" mat-raised-button>Save event</button><br><br>
 </form>
+</div>
+

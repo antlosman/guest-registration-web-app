@@ -1,0 +1,33 @@
+.div {
+  margin-left: 400px;
+}
+
+.test {
+  margin-right: 400px;
+}
+
+
+h1 {
+  color: #0059a1;
+  margin-top: 20px;
+  margin-left: 375px;
+}
+
+
+label {
+  float: left;
+}
+
+label {
+  float: left;
+  margin-left: 375px;
+}
+
+input {
+  float: right;
+  margin-left: -510px;
+}
+
+button {
+  margin-left: 375px;
+}

@@ -1,54 +1,55 @@
 
-<table class="event-table">
-  <tbody>
-    <tr>
-      <td>Event name:</td>
-      <td>{{event.name}}</td>
-    </tr>
-  </tbody>
+<div class="container">
+<h1>Participants</h1>
 
-  <tbody>
-    <tr>
-      <td>Event date:</td>
-      <td>{{event.date}}</td>
-    </tr>
-  </tbody>
-
-  <tbody>
+<table>
+  <tr>
+    <td>Event name:</td>
+    <td>{{event.name}}</td>
+  </tr>
+  <p></p>
+  <tr>
+    <td>Event date:</td>
+    <td>{{event.date}}</td>
+  </tr>
+  <p></p>
   <tr>
     <td>Participants:</td>
-    <td>test</td>
   </tr>
-  </tbody>
-
   <p></p>
-
-  <p>{{event.eventPrivateClients | json}}</p>
-  <tbody>
-  <tr *ngFor="let item of event.eventPrivateClients">
-    <td *ngFor="let each of item | keyvalue"> {{each.value}} </td>
-  </tr>
-  </tbody>
-
 </table>
+</div>
 
+<div class="participants-table">
+<table>
+  <tr *ngFor="let item of event.eventPrivateClients">
+    <td>{{item.firstName}} </td>
+    <td>{{item.lastName}} </td>
+    <td>{{item.idNumber}} </td>
+    <td>{{item.additionalInfo}} </td>
+  </tr>
+</table>
+</div>
+
+<div class="participant-form-table">
 <form [formGroup]="privateClientForm" (ngSubmit)="onFormSubmit()">
-  <p>Creating new event</p>
-  <label for="firstName">First name</label>
-  <input id="firstName" type="text" formControlName="firstName"><br><br>
+  <h1>Add new participant</h1>
+  <label for="firstName">First name:</label>
+  <input id="firstName" type="text" formControlName="firstName" size="30"><br><br>
 
-  <label for="lastName">Last name</label>
-  <input id="lastName" type="text" formControlName="lastName"><br><br>
+  <label for="lastName">Last name:</label>
+  <input id="lastName" type="text" formControlName="lastName" size="30"><br><br>
 
-  <label for="idNumber">Id number</label>
-  <input id="idNumber" type="text" formControlName="idNumber"><br><br>
+  <label for="idNumber">Id number:</label>
+  <input id="idNumber" type="text" formControlName="idNumber" size="30"><br><br>
 
-  <label for="paymentMethod">paymentMethod</label>
-  <input id="paymentMethod" type="text" formControlName="paymentMethod"><br><br>
+  <label for="paymentMethod">Payment method:</label>
+  <input id="paymentMethod" type="text" formControlName="paymentMethod" size="30"><br><br>
 
-  <label for="additionalInfo">additionalInfo</label>
-  <input id="additionalInfo" type="text" formControlName="additionalInfo"><br><br>
+  <label for="additionalInfo">Additional info:</label>
+  <textarea id="additionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
 
   <button [disabled]="!privateClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
-
 </form>
+</div>
+
