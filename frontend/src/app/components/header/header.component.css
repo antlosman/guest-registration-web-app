@@ -1,1 +1,8 @@
+.spacer {
+  flex: 1 1 auto;
+}
 
+.header {
+  background-color: white;
+  color: #0059a1;
+}
