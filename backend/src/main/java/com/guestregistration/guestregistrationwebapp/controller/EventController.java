@@ -9,6 +9,7 @@ import com.guestregistration.guestregistrationwebapp.service.PrivateClientServic
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class EventController {
 
     // TODO: change method name to createNewEvent
     @PostMapping
-    public EventDTO createNewPost(@RequestBody EventDTO toStore) {
+    public EventDTO createNewPost(@RequestBody @Valid EventDTO toStore) {
         log.info("Trying to store new post: [{}]", toStore);
         return eventService.createNewEvent(toStore);
     }

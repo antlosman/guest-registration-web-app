@@ -1,9 +1,14 @@
 package com.guestregistration.guestregistrationwebapp.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,10 +30,14 @@ public class Event {
     @GeneratedValue(strategy = SEQUENCE, generator = "event_sequence")
     private Long id;
 
+    @NotEmpty
+    @Size(min = 3, message = "Minimum length of Event name is 3 letters!")
     private String name;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    @Positive(message = "Participants quantity number should more than zero!")
     private int participantsQuantity;
 
     @ManyToMany(cascade = CascadeType.ALL)
