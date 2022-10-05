@@ -4,6 +4,8 @@ package com.guestregistration.guestregistrationwebapp.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Builder
 @Entity
+
 public class Event {
 
     @Id
@@ -24,6 +27,8 @@ public class Event {
     @GeneratedValue(strategy = SEQUENCE, generator = "event_sequence")
     private Long id;
 
+    @NotEmpty
+    @Size(min = 3, message = "Minimum length of Event name is 3 characters! ")
     private String name;
 
     private LocalDate date;
