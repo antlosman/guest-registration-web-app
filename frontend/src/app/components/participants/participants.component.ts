@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventParticipantsService } from "../../services/event-participants.service";
 import { ActivatedRoute } from "@angular/router";
-import { FormBuilder } from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-participants',
@@ -11,10 +11,10 @@ import { FormBuilder } from "@angular/forms";
 
 export class ParticipantsComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'idNumber'];
-
   eventId: any;
   event: any;
+
+  isValidFormSubmitted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,9 +37,9 @@ export class ParticipantsComponent implements OnInit {
   }
 
   privateClientForm = this.formBuilder.group({
-    firstName: [''],
-    lastName: [''],
-    idNumber: [''],
+    firstName: ['', [Validators.required, Validators.nullValidator]],
+    lastName: ['', [Validators.required, Validators.nullValidator]],
+    idNumber: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
     paymentMethod: [''],
     additionalInfo: ['']
   })
@@ -47,6 +47,12 @@ export class ParticipantsComponent implements OnInit {
   onFormSubmit() {
     console.log("On submitting whole post...")
     console.log(`Value from form: [${JSON.stringify(this.privateClientForm.value)}]`)
+
+    if (this.privateClientForm.invalid) {
+      return;
+    }
+
+    this.isValidFormSubmitted = true;
 
     let event: any = {
       firstName: this.privateClientForm.value.firstName,
@@ -60,12 +66,13 @@ export class ParticipantsComponent implements OnInit {
 
       console.log(data)
         this.eventParticipantsService.mapping(this.eventId, data.id).subscribe(( _data => {
-
             console.log(this.event)
           })
         )
     })
     )
+
+    this.privateClientForm.reset()
   }
 
 }
