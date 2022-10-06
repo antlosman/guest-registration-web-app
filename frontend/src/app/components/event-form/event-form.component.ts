@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import { EventFormService } from "../../services/event-form.service";
 import { Event } from "../../models/event";
 
@@ -10,19 +10,28 @@ import { Event } from "../../models/event";
 })
 export class EventFormComponent {
 
+  unamePattern = "^\\d{4}-\\d{2}-\\d{2}$";
+  isValidFormSubmitted = false;
+
   constructor(private formBuilder: FormBuilder,
               private eventService: EventFormService ) { }
 
   eventForm = this.formBuilder.group({
-    name: [''],
-    date: [''],
-    participantsQuantity: ['']
+    name: ['', [Validators.required, Validators.nullValidator]],
+    date: ['', [Validators.required, Validators.pattern(this.unamePattern)]],
+    participantsQuantity: ['', [Validators.required, Validators.min(1)]]
   })
 
 
   onFormSubmit() {
-    console.log("On submitting whole post...")
+    console.log("On submitting whole event...")
     console.log(`Value from form: [${JSON.stringify(this.eventForm.value)}]`)
+
+    if (this.eventForm.invalid) {
+      return;
+    }
+
+    this.isValidFormSubmitted = true;
 
     let event: Event = {
       id: 0,
@@ -32,8 +41,8 @@ export class EventFormComponent {
     }
 
     this.eventService.createNewEvent(event);
+    this.eventForm.reset();
 
   }
-
 
 }
