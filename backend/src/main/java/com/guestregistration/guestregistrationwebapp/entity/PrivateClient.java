@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +27,13 @@ public class PrivateClient {
     @GeneratedValue(strategy = SEQUENCE, generator = "client_sequence")
     private Long id;
 
+    @NotEmpty(message = "First name cannot by empty!")
     private String firstName;
 
+    @NotEmpty(message = "Last name cannot by empty!")
     private String lastName;
 
+    @Digits(integer = 11, fraction = 0)
     private Long idNumber;
 
     private String paymentMethod;
