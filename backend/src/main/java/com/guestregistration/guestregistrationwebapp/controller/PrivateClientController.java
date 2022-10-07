@@ -32,4 +32,10 @@ public class PrivateClientController {
         log.info("Reading all private clients...");
         return privateClientService.findAllPrivateClients();
     }
+
+    @PutMapping("/update-private-client")
+    public PrivateClientDTO editPrivateClient(@RequestBody PrivateClientDTO toStore) {
+        log.info("Trying to update private client...");
+        return privateClientService.updatePrivateClient(toStore);
+    }
 }

@@ -46,4 +46,14 @@ public class PrivateClientService {
                 .map(privateClientConverter::fromEntityToDto)
                 .toList();
     }
+
+    public PrivateClientDTO updatePrivateClient(PrivateClientDTO privateClientToUpdate) {
+        log.debug("Trying to update private client...");
+        var entity = privateClientConverter.fromDtoToEntity(privateClientToUpdate);
+        privateClientRepository.save(entity);
+        var result = privateClientConverter.fromEntityToDto(entity);
+        log.info("Private client is updated: [{}]", result);
+        return result;
+    }
+
 }
