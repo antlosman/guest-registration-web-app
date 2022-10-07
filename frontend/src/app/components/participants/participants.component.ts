@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventParticipantsService } from "../../services/event-participants.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
@@ -20,6 +20,7 @@ export class ParticipantsComponent implements OnInit {
     private route: ActivatedRoute,
     private eventParticipantsService: EventParticipantsService,
     private formBuilder: FormBuilder,
+    private router: Router
   ) {
   }
 
@@ -34,6 +35,10 @@ export class ParticipantsComponent implements OnInit {
       this.event = data;
       console.log(this.event)
     })
+  }
+
+  updatePrivateClient(id: number) {
+    this.router.navigate(['update-privateClient-by-id', id])
   }
 
   privateClientForm = this.formBuilder.group({

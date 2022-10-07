@@ -3,7 +3,11 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {Event} from "../models/event";
 import {PrivateClient} from "../models/privateClient";
-import {BACKEND_CREATE_EVENT} from "../constants/constant";
+import {
+  BACKEND_CREATE_EVENT,
+  BACKEND_GET_PRIVATE_CLIENT_BY_ID,
+  BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID
+} from "../constants/constant";
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +48,11 @@ export class EventParticipantsService {
     return  this.http.put("http://localhost:8080/events/"+ newEvent +"/private-clients/"+id, {})
   }
 
+  getPrivateClientById(id: number): Observable<PrivateClient> {
+    return this.http.get<PrivateClient>(`${BACKEND_GET_PRIVATE_CLIENT_BY_ID}/${id}`)
+  }
 
+  updatePrivateClient(id: number, privateClient: PrivateClient): Observable<any> {
+    return this.http.put(`${BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID}/${id}`, privateClient)
+  }
 }

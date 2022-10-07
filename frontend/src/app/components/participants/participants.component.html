@@ -30,6 +30,9 @@
     <td>{{item.lastName}} </td>
     <td>{{item.idNumber}} </td>
     <td>{{item.additionalInfo}} </td>
+    <td>
+      <button (click)="updatePrivateClient(item.id)" class="mat-button"> Update </button>
+    </td>
   </tr>
 </table>
 </div>

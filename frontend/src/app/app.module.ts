@@ -19,12 +19,14 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ParticipantsComponent } from './components/participants/participants.component';
+import { UpdatePrivateClientComponent } from './components/update-private-client/update-private-client.component';
 
 const routes: Routes = [
   {path: 'homepage', component: HomeComponent},
   {path: 'add-event', component: EventFormComponent},
   {path: 'futureEvent/:id', component: ParticipantsComponent},
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: 'update-privateClient-by-id/:id', component: UpdatePrivateClientComponent}
 ];
 
 @NgModule({
@@ -36,7 +38,8 @@ const routes: Routes = [
     FooterComponent,
     EventFormComponent,
     HomeComponent,
-    ParticipantsComponent
+    ParticipantsComponent,
+    UpdatePrivateClientComponent
   ],
   imports: [
     BrowserModule,

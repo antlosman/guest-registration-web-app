@@ -1,0 +1,22 @@
+
+<div class="participant-form-table">
+  <form [formGroup]="privateClientForm" (ngSubmit)="onSubmit()">
+    <h1>Update Participant</h1>
+    <label for="firstName">First name:</label>
+    <input id="firstName" type="text" [(ngModel)]="privateClient.firstName" formControlName="firstName" size="30"><br><br>
+
+    <label for="lastName">Last name:</label>
+    <input id="lastName" type="text" [(ngModel)]="privateClient.lastName" formControlName="lastName" size="30"><br><br>
+
+    <label for="idNumber">Id number:</label>
+    <input id="idNumber" type="text" [(ngModel)]="privateClient.idNumber" formControlName="idNumber" size="30"><br><br>
+
+    <label for="paymentMethod">Payment method:</label>
+    <input id="paymentMethod" type="text" [(ngModel)]="privateClient.paymentMethod" formControlName="paymentMethod" size="30"><br><br>
+
+    <label for="additionalInfo">Additional info:</label>
+    <textarea id="additionalInfo" [(ngModel)]="privateClient.additionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
+
+    <button [disabled]="!privateClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+  </form>
+</div>
