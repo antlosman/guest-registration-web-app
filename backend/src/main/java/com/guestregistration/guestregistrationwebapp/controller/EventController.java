@@ -4,9 +4,12 @@ import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
+import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
 import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -80,6 +83,12 @@ public class EventController {
     public PrivateClientDTO createNewPrivateClient(@RequestBody PrivateClientDTO toStore) {
         log.info("Trying to store new private client: [{}]", toStore);
         return privateClientService.createNewPrivateClient(toStore);
+    }
+
+    @DeleteMapping("/delete-event/{id}")
+    public ResponseEntity<Event> deletePrivateClient(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
