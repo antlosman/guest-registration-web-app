@@ -5,6 +5,7 @@ import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,5 +68,11 @@ public class PrivateClientController {
 
         PrivateClient updatedPrivateClient = privateClientRepository.save(privateClient);
         return ResponseEntity.ok(updatedPrivateClient);
+    }
+
+    @DeleteMapping("/delete-private-client/{id}")
+    public ResponseEntity<PrivateClient> deletePrivateClient(@PathVariable Long id) {
+        privateClientService.deletePrivateClient(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

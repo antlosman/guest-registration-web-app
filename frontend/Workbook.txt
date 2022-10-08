@@ -1,3 +1,36 @@
+
+Teie proovitöö läbis hindamise ning hindaja tagasiside oli järgmine:
+
+„Jäänud tegemata:
+
++ Vormi valideerimine (front ja back-end mõlemad)
+
+Fikseeritud makseviiside valik, andmebaasist lugemine
+
+Salvestatud olemite muutmine
+
+Vormi saatmisel tagasiside (redirect, veateade)
+
+Osavõtjad on ainult eraisikud ehk ka see osa on tehtud lihtsustatult
+
+Mida võiks paremini teha:
+
+Vormi väljad vastavalt andmetüübile (kpv, number)
+
+Frontendi konfiguratsiooni fail, mitte hardcoded väärtused
+
+Kasutada spring raamistiku võimalusi rakenduse confimisel (cors filter)
+
+Ürituse detailvaate komponent võiks näidata ka vanade ürituste osalejaid
+
+
+
+
+
+
+
+
+
 <mat-toolbar color="primary">
 
   <span>

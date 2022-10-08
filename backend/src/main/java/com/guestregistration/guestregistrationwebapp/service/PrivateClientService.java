@@ -64,4 +64,8 @@ public class PrivateClientService {
         return result;
     }
 
+    public void deletePrivateClient(Long id) {
+        privateClientRepository.deleteById(id);
+    }
+
 }
