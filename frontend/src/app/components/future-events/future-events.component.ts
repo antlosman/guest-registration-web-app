@@ -20,7 +20,11 @@ export class FutureEventsComponent implements OnInit {
       .subscribe(value => {this.futureEvents = value});
   }
 
-  displayedColumns: string[] = ['id', 'name', 'date', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'participants', "actions"];
   groupedColumns: string[] = ['grouped'];
 
+  onDeletePrivateClient(id: any) {
+    console.log("id", id)
+    this.futureEventsService.deleteEvent(id).subscribe()
+  }
 }

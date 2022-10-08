@@ -6,3 +6,5 @@ export const BACKEND_PAST_EVENTS = `${BACKEND_CONFIG_ROOT}/events/read-all-event
 export const BACKEND_FIND_EVENT_BY_ID = `${BACKEND_CONFIG_ROOT}/findEventById/{eventID}`
 export const BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/private-clients/update-private-client-by-id`
 export const BACKEND_GET_PRIVATE_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/private-clients/find-private-client-by-id`
+export const BACKEND_DELETE_PRIVATE_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/private-clients/delete-private-client`
+export const BACKEND_DELETE_EVENT_BY_ID = `${BACKEND_CONFIG_ROOT}/events/delete-event`
