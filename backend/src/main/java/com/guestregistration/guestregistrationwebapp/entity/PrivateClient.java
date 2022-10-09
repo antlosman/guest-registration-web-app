@@ -1,6 +1,8 @@
 package com.guestregistration.guestregistrationwebapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.guestregistration.guestregistrationwebapp.enumeration.PaymentMethod;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,7 +38,7 @@ public class PrivateClient {
     @Digits(integer = 11, fraction = 0)
     private Long idNumber;
 
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
     private String additionalInfo;
 

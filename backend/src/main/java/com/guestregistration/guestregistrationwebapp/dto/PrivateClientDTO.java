@@ -1,5 +1,7 @@
 package com.guestregistration.guestregistrationwebapp.dto;
 
+import com.guestregistration.guestregistrationwebapp.enumeration.PaymentMethod;
+
 import javax.validation.constraints.*;
 
 
@@ -12,7 +14,7 @@ public record PrivateClientDTO(
         //@Pattern(regexp = "^\\d{11}$")
         @Digits(integer = 11, fraction = 0)
         Long idNumber,
-        String paymentMethod,
+        PaymentMethod paymentMethod,
         String additionalInfo
 ) {
 
