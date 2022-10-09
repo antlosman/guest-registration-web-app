@@ -32,7 +32,14 @@ textarea {
 }
 
 button {
-  margin-top: 85px;
+  margin-top: 45px;
+}
+
+select {
+  float: right;
+  margin-left: 15px;
+  width: 239px;
+  overflow:hidden;
 }
 
 

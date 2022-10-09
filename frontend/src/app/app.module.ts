@@ -20,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ParticipantsComponent } from './components/participants/participants.component';
 import { UpdatePrivateClientComponent } from './components/update-private-client/update-private-client.component';
+import {MatSelectModule} from "@angular/material/select";
 
 const routes: Routes = [
   {path: 'homepage', component: HomeComponent},
@@ -41,20 +42,21 @@ const routes: Routes = [
     ParticipantsComponent,
     UpdatePrivateClientComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatCardModule,
-    CdkTableModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatCardModule,
+        CdkTableModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule,
+        FormsModule,
+        MatSelectModule
+    ],
   providers: [],
   bootstrap: [WelcomeComponent]
 })
