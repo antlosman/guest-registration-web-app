@@ -25,6 +25,6 @@ export class FutureEventsComponent implements OnInit {
 
   onDeletePrivateClient(id: any) {
     console.log("id", id)
-    this.futureEventsService.deleteEvent(id).subscribe()
+    this.futureEventsService.deleteEvent(id).subscribe(_value => {this.ngOnInit()});
   }
 }

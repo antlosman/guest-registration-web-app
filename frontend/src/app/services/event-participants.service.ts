@@ -4,7 +4,7 @@ import {Observable, tap} from "rxjs";
 import {Event} from "../models/event";
 import {PrivateClient} from "../models/privateClient";
 import {
-  BACKEND_CREATE_EVENT,
+  BACKEND_CREATE_EVENT, BACKEND_DELETE_PRIVATE_CLIENT_BY_ID,
   BACKEND_GET_PRIVATE_CLIENT_BY_ID,
   BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID
 } from "../constants/constant";
@@ -23,7 +23,7 @@ export class EventParticipantsService {
         tap(_ => console.log(`fetched event id=${id}`))
       )
   }
-
+  // todo: code cleaning
   createNewPrivateClient(newEvent: any): Observable<any> {
     // let payload = {
     //   id: newEvent.id,
@@ -55,4 +55,9 @@ export class EventParticipantsService {
   updatePrivateClient(id: number, privateClient: PrivateClient): Observable<any> {
     return this.http.put(`${BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID}/${id}`, privateClient)
   }
+
+  deletePrivateClient(id: number): Observable<void> {
+    return this.http.delete<void>(`${BACKEND_DELETE_PRIVATE_CLIENT_BY_ID}/${id}`)
+  }
+
 }

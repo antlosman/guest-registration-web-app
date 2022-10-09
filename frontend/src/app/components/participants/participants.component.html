@@ -8,12 +8,12 @@
 <table>
   <tr>
     <td>Event name:</td>
-    <td>{{event.name}}</td>
+    <td>{{event?.name}}</td>
   </tr>
   <p></p>
   <tr>
     <td>Event date:</td>
-    <td>{{event.date}}</td>
+    <td>{{event?.date}}</td>
   </tr>
   <p></p>
   <tr>
@@ -25,13 +25,14 @@
 
 <div class="participants-table">
 <table>
-  <tr *ngFor="let item of event.eventPrivateClients">
+  <tr *ngFor="let item of event?.eventPrivateClients">
     <td>{{item.firstName}} </td>
     <td>{{item.lastName}} </td>
     <td>{{item.idNumber}} </td>
     <td>{{item.additionalInfo}} </td>
     <td>
       <button (click)="updatePrivateClient(item.id)" class="mat-button"> Update </button>
+      <button (click)="onDeletePrivateClient(item.id)" class="mat-button"> Delete </button>
     </td>
   </tr>
 </table>

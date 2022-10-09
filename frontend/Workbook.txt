@@ -9,7 +9,7 @@ Fikseeritud makseviiside valik, andmebaasist lugemine
 
 Salvestatud olemite muutmine
 
-Vormi saatmisel tagasiside (redirect, veateade)
++? Vormi saatmisel tagasiside (redirect, veateade)
 
 Osavõtjad on ainult eraisikud ehk ka see osa on tehtud lihtsustatult
 
@@ -27,29 +27,6 @@ Kasutada spring raamistiku võimalusi rakenduse confimisel (cors filter)
 
 
 
-
-
-
-
-<mat-toolbar color="primary">
-
-  <span>
-    <img src="pictures/logo.svg" class="angular-logo">
-  </span>
-  <span class="fill-remaining-space"></span>
-
-  <button mat-button>Home page</button>
-  <button mat-button>Add new event</button>
-
-</mat-toolbar>
-
-This part is from welcome component. Read the applicationName.
-<div class="center">
-  <h1>Welcome to {{applicationName}}</h1>
-</div>
-
-
-
 ------------------------------------------------------------------------------------------------------------------------
 The way I got access to event participants
 
@@ -64,142 +41,693 @@ The way I got access to event participants
 
 ------------------------------------------------------------------------------------------------------------------------
 
-+12516505966
-
-------------------------------------------------------------------------------------------------------------------------
-welcome.component.css
-
-.center {
-  display: flex;
-  justify-content: center;
-}
-
-.box-with-text {
-  display: inline-block;
-  background-color: #0059a1;
-  color: white;
-  padding-bottom: 280px;
-  padding-right: 785px;
-  margin-left: 10%;
-  padding-top: 20px;
-}
-
-.homepage-image-right {
-  margin-left: 1050px;
-  margin-top: -400px;
-  padding-bottom: 15px;
-}
-------------------------------------------------------------------------------------------------------------------------
-
-------------------------------------------------------------------------------------------------------------------------
-home.component.css
-
-.box-with-text {
-  display: inline-block;
-  background-color: #0059a1;
-  color: white;
-  padding-bottom: 280px;
-  padding-right: 785px;
-  margin-left: 10%;
-  padding-top: 20px;
-}
-
-.homepage-image-right {
-  margin-left: 1050px;
-  margin-top: -400px;
-  padding-bottom: 15px;
-}
-------------------------------------------------------------------------------------------------------------------------
 
 
 ------------------------------------------------------------------------------------------------------------------------
-style.css:
+package com.guestregistration.guestregistrationwebapp.entity;
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #eef2f5 }
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+
+public class Event {
+
+    @Id
+    @SequenceGenerator(name = "event_sequence", sequenceName = "event_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "event_sequence")
+    private Long id;
+
+    @NotEmpty(message = "Event name cannot be empty!")
+    private String name;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+
+    @Positive(message = "Participants quantity number should more than zero!")
+    private int participantsQuantity;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<PrivateClient> eventPrivateClients = new ArrayList<>();
+
+}
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+package com.guestregistration.guestregistrationwebapp.controller;
+
+import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
+import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
+import com.guestregistration.guestregistrationwebapp.dto.EventDTO2;
+import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
+import com.guestregistration.guestregistrationwebapp.entity.Event;
+import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
+import com.guestregistration.guestregistrationwebapp.service.EventService;
+import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@Slf4j
+@RequestMapping("/events")
+@CrossOrigin
+public class EventController {
+
+    private final EventService eventService;
+
+    private final EventConverter eventConverter;
+
+    private final PrivateClientService privateClientService;
+
+    public EventController(EventService eventService, EventConverter eventConverter, PrivateClientService privateClientService) {
+        this.eventService = eventService;
+        this.eventConverter = eventConverter;
+        this.privateClientService = privateClientService;
+    }
+
+    // TODO: change method name to createNewEvent
+    @PostMapping
+    public EventDTO createNewPost(@RequestBody @Valid EventDTO toStore) {
+        log.info("Trying to store new post: [{}]", toStore);
+        return eventService.createNewEvent(toStore);
+    }
+
+    @GetMapping("/read-all-events")
+    public List<EventDTO> readAllEvents() {
+        log.info("Reading all events...");
+        return eventService.findAllEvents();
+    }
+
+    @GetMapping("read-all-events-before-today")
+    public List<EventDTO> readAllEventsBeforeToday() {
+        log.info("Reading events before today...");
+        return eventService.findAllEventsBeforeToday();
+    }
+
+    @GetMapping("read-all-events-after-today")
+    public List<EventDTO> readAllEventsAfterToday() {
+        log.info("Reading events after today...");
+        return eventService.findAllEventsAfterToday();
+    }
+
+    @PutMapping("/{eventID}/private-clients/{privateClientID}")
+    public EventDTO assignPrivateClientToEvent(
+            @PathVariable Long eventID,
+            @PathVariable Long privateClientID
+            //@RequestBody EventDTO eventDTO
+    ) {
+        log.info("Trying to add private client to event...");
+
+        Event event = eventService.addPrivateClientToEvent(eventID, privateClientID);
+        return eventConverter.fromEntityToDto(event);
+    }
+
+    @GetMapping("/findEventById/{eventID}")
+    public EventDTO2 findEventById(
+            @PathVariable Long eventID
+    ) {
+        log.info("Trying to find event by id...");
+        Event event = eventService.getEvent(eventID);
+        EventDTO2 eventDTO2 = new EventDTO2();
+        eventDTO2.setEventPrivateClients(event.getEventPrivateClients());
+        eventDTO2.setName(event.getName());
+        eventDTO2.setDate(event.getDate());
+        return eventDTO2;
+    }
+
+    @PostMapping("/private-client")
+    public PrivateClientDTO createNewPrivateClient(@RequestBody PrivateClientDTO toStore) {
+        log.info("Trying to store new private client: [{}]", toStore);
+        return privateClientService.createNewPrivateClient(toStore);
+    }
+
+    @DeleteMapping("/delete-event/{id}")
+    public ResponseEntity<Event> deletePrivateClient(@PathVariable Long id) {
+        Event eventList = eventService.getEvent(id);
+        if (eventList != null) {
+            for (PrivateClient privateClient : eventList.getEventPrivateClients()) {
+                privateClientService.deletePrivateClient(privateClient.getId());
+
+            }
+        }
+        //eventService.deleteEvent(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+package com.guestregistration.guestregistrationwebapp.service;
+
+import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
+import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
+import com.guestregistration.guestregistrationwebapp.entity.Event;
+import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
+import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
+import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Slf4j
+public class EventService {
+
+    private final EventRepository eventRepository;
+    private final EventConverter eventConverter;
+
+    private final PrivateClientRepository privateClientRepository;
+
+
+    public EventService(EventRepository eventRepository, EventConverter eventConverter, PrivateClientRepository clientRepository) {
+        this.eventRepository = eventRepository;
+        this.eventConverter = eventConverter;
+        this.privateClientRepository = clientRepository;
+    }
+
+    public EventDTO createNewEvent(EventDTO toStore) {
+
+        log.info("Creating new Event... [{}]", toStore);
+
+        var entity = eventConverter.fromDtoToEntity(toStore);
+        eventRepository.save(entity);
+        var result = eventConverter.fromEntityToDto(entity);
+
+        log.info("New event successfully created: [{}]", result);
+
+        return result;
+    }
+
+    public List<EventDTO> findAllEvents() {
+        var result = eventRepository.findAll();
+        log.debug("Result: [{}]", result);
+        log.info("Number of read events: [{}]", result.size());
+        return result
+                .stream()
+                .map(eventConverter::fromEntityToDto)
+                .toList();
+    }
+
+    public List<EventDTO> findAllEventsBeforeToday() {
+        var result = eventRepository.findAllByDateBefore(LocalDate.now());
+        log.debug("Result: [{}]", result);
+        log.info("Number of read events: [{}]", result.size());
+        return result
+                .stream()
+                .map(eventConverter::fromEntityToDto)
+                .toList();
+    }
+
+    public List<EventDTO> findAllEventsAfterToday() {
+        var result = eventRepository.findAllByDateAfter(LocalDate.now());
+        log.debug("Result: [{}]", result);
+        log.info("Number of read events: [{}]", result.size());
+        return result
+                .stream()
+                .map(eventConverter::fromEntityToDto)
+                .toList();
+    }
+
+    public Event addPrivateClientToEvent(Long eventId, Long privateClientId) {
+        log.debug("Adding new private client to event...");
+        var event = eventRepository.findById(eventId).get();
+        var privateClient = privateClientRepository.findById(privateClientId).get();
+        event.getEventPrivateClients().add(privateClient);
+        log.info("New private client successfully added to event: [{}]", event);
+        privateClient.setEvents(event);
+        privateClientRepository.save(privateClient);
+        return eventRepository.save(event);
+    }
+
+    public Event getEvent(Long id) {
+        Optional<Event> event = eventRepository.findById(id);
+        if (event.isPresent()) {
+            List<PrivateClient> privateClientList = privateClientRepository.findByEvents(event.get());
+            event.get().setEventPrivateClients(privateClientList);
+        }
+        return event.get();
+    }
+
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
+    }
+
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+package com.guestregistration.guestregistrationwebapp.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class PrivateClient {
+
+    @Id
+    @SequenceGenerator(name = "client_sequence", sequenceName = "client_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "client_sequence")
+    private Long id;
+
+    @NotEmpty(message = "First name cannot by empty!")
+    private String firstName;
+
+    @NotEmpty(message = "Last name cannot by empty!")
+    private String lastName;
+
+    @Digits(integer = 11, fraction = 0)
+    private Long idNumber;
+
+    private String paymentMethod;
+
+    private String additionalInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Event events;
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+package com.guestregistration.guestregistrationwebapp.repository;
+
+import com.guestregistration.guestregistrationwebapp.entity.Event;
+import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface PrivateClientRepository extends JpaRepository<PrivateClient, Long> {
+
+    public List<PrivateClient> findByEvents(Event event);
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+package com.guestregistration.guestregistrationwebapp.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+import java.time.LocalDate;
+import java.util.List;
+
+public class EventDTO2 {
+    Long id;
+    @NotEmpty(message = "Event name cannot be empty!")
+    String name;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    LocalDate date;
+    @Positive(message = "Participants quantity number should more than zero!")
+    int participantsQuantity;
+    List<PrivateClient> eventPrivateClients;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public int getParticipantsQuantity() {
+        return participantsQuantity;
+    }
+
+    public void setParticipantsQuantity(int participantsQuantity) {
+        this.participantsQuantity = participantsQuantity;
+    }
+
+    public List<PrivateClient> getEventPrivateClients() {
+        return eventPrivateClients;
+    }
+
+    public void setEventPrivateClients(List<PrivateClient> eventPrivateClients) {
+        this.eventPrivateClients = eventPrivateClients;
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable, tap} from "rxjs";
+import {Event} from "../models/event";
+import {PrivateClient} from "../models/privateClient";
+import {
+  BACKEND_CREATE_EVENT, BACKEND_DELETE_PRIVATE_CLIENT_BY_ID,
+  BACKEND_GET_PRIVATE_CLIENT_BY_ID,
+  BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID
+} from "../constants/constant";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EventParticipantsService {
+
+  constructor(private http: HttpClient) { }
+
+
+  getEventById(id: number): Observable<Event> {
+    return this.http.get<Event>('http://localhost:8080/events/findEventById/' + id)
+      .pipe(
+        tap(_ => console.log(`fetched event id=${id}`))
+      )
+  }
+  // todo: code cleaning
+  createNewPrivateClient(newEvent: any): Observable<any> {
+    // let payload = {
+    //   id: newEvent.id,
+    //   name: newEvent.name,
+    //   date: newEvent.date,
+    //   participantsQuantity: newEvent.participantsQuantity
+    // }
+   // console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+
+    return this.http.post("http://localhost:8080/events/private-client", newEvent)
+  }
+
+  mapping(newEvent: any, id: any): Observable<any> {
+    // let payload = {
+    //   id: newEvent.id,
+    //   name: newEvent.name,
+    //   date: newEvent.date,
+    //   participantsQuantity: newEvent.participantsQuantity
+    // }
+    // console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+
+    return  this.http.put("http://localhost:8080/events/"+ newEvent +"/private-clients/"+id, {})
+  }
+
+  getPrivateClientById(id: number): Observable<PrivateClient> {
+    return this.http.get<PrivateClient>(`${BACKEND_GET_PRIVATE_CLIENT_BY_ID}/${id}`)
+  }
+
+  updatePrivateClient(id: number, privateClient: PrivateClient): Observable<any> {
+    return this.http.put(`${BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID}/${id}`, privateClient)
+  }
+
+  deletePrivateClient(id: number): Observable<void> {
+    return this.http.delete<void>(`${BACKEND_DELETE_PRIVATE_CLIENT_BY_ID}/${id}`)
+  }
+
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+<p *ngIf="isValidFormSubmitted && privateClientForm.pristine" [ngClass] = "'success'">
+  Form submitted successfully.
+</p>
+
+<div class="container">
+<h1>Participants</h1>
+
+<table>
+  <tr>
+    <td>Event name:</td>
+    <td>{{event?.name}}</td>
+  </tr>
+  <p></p>
+  <tr>
+    <td>Event date:</td>
+    <td>{{event?.date}}</td>
+  </tr>
+  <p></p>
+  <tr>
+    <td>Participants:</td>
+  </tr>
+  <p></p>
+</table>
+</div>
+
+<div class="participants-table">
+<table>
+  <tr *ngFor="let item of event?.eventPrivateClients">
+    <td>{{item.firstName}} </td>
+    <td>{{item.lastName}} </td>
+    <td>{{item.idNumber}} </td>
+    <td>{{item.additionalInfo}} </td>
+    <td>
+      <button (click)="updatePrivateClient(item.id)" class="mat-button"> Update </button>
+      <button (click)="onDeletePrivateClient(item.id)" class="mat-button"> Delete </button>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div class="participant-form-table">
+<form [formGroup]="privateClientForm" (ngSubmit)="onFormSubmit()">
+  <h1>Add new participant</h1>
+  <label for="firstName">First name:</label>
+  <input id="firstName" type="text" formControlName="firstName" size="30"><br><br>
+
+  <label for="lastName">Last name:</label>
+  <input id="lastName" type="text" formControlName="lastName" size="30"><br><br>
+
+  <label for="idNumber">Id number:</label>
+  <input id="idNumber" type="text" formControlName="idNumber" size="30"><br><br>
+
+  <label for="paymentMethod">Payment method:</label>
+  <input id="paymentMethod" type="text" formControlName="paymentMethod" size="30"><br><br>
+
+  <label for="additionalInfo">Additional info:</label>
+  <textarea id="additionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
+
+  <button [disabled]="!privateClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+</form>
+</div>
+
+<app-footer></app-footer>
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+import { Component, OnInit } from '@angular/core';
+import { EventParticipantsService } from "../../services/event-participants.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import {FormBuilder, Validators} from "@angular/forms";
+import {HttpErrorResponse} from "@angular/common/http";
+
+@Component({
+  selector: 'app-participants',
+  templateUrl: './participants.component.html',
+  styleUrls: ['./participants.component.css']
+})
+
+export class ParticipantsComponent implements OnInit {
+
+  eventId: any;
+  event: any;
+
+  isValidFormSubmitted = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private eventParticipantsService: EventParticipantsService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.eventId = this.route.snapshot.params['id']
+    this.getEventByID();
+  }
+
+  getEventByID() {
+    this.eventParticipantsService.getEventById(this.eventId).subscribe( data =>
+    {
+      this.event = data;
+      console.log(this.event)
+    })
+  }
+
+  updatePrivateClient(id: number) {
+    this.router.navigate(['update-privateClient-by-id', id])
+  }
+
+  // deletePrivateClient(id: number) {
+  //   this.eventParticipantsService.deletePrivateClient(id).subscribe()
+  // }
+
+  onDeletePrivateClient(id: any) {
+    console.log("id", id)
+    this.eventParticipantsService.deletePrivateClient(id).subscribe((data: any) => {
+      console.log(data)
+      this.event.eventParticipant = data
+    })
+  }
+
+  privateClientForm = this.formBuilder.group({
+    firstName: ['', [Validators.required, Validators.nullValidator]],
+    lastName: ['', [Validators.required, Validators.nullValidator]],
+    idNumber: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+    paymentMethod: [''],
+    additionalInfo: ['']
+  })
+
+  onFormSubmit() {
+    console.log("On submitting whole post...")
+    console.log(`Value from form: [${JSON.stringify(this.privateClientForm.value)}]`)
+
+    if (this.privateClientForm.invalid) {
+      return;
+    }
+
+    this.isValidFormSubmitted = true;
+
+    let event: any = {
+      firstName: this.privateClientForm.value.firstName,
+      lastName: this.privateClientForm.value.lastName,
+      idNumber: this.privateClientForm.value.idNumber,
+      paymentMethod: this.privateClientForm.value.paymentMethod,
+      additionalInfo: this.privateClientForm.value.additionalInfo
+    }
+
+    this.eventParticipantsService.createNewPrivateClient(event).subscribe((data => {
+
+      console.log(data)
+        this.eventParticipantsService.mapping(this.eventId, data.id).subscribe(( _data => {
+            console.log(this.event)
+          })
+        )
+    })
+    )
+
+    this.privateClientForm.reset()
+  }
+
+}
+
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+import { Component, OnInit } from '@angular/core';
+import { FutureEventsService } from "../../services/future-events.service";
+import { Event } from "../../models/event";
+
+
+@Component({
+  selector: 'app-future-events',
+  templateUrl: './future-events.component.html',
+  styleUrls: ['./future-events.component.css']
+})
+export class FutureEventsComponent implements OnInit {
+
+  futureEvents: Array<Event> = []
+
+  constructor(private futureEventsService: FutureEventsService) { }
+
+  ngOnInit(): void {
+    this.futureEventsService
+      .getFutureEvents()
+      .subscribe(value => {this.futureEvents = value});
+  }
+
+  displayedColumns: string[] = ['id', 'name', 'date', 'participants', "actions"];
+  groupedColumns: string[] = ['grouped'];
+
+  onDeletePrivateClient(id: any) {
+    console.log("id", id)
+    this.futureEventsService.deleteEvent(id).subscribe(value => {this.ngOnInit()});
+  }
+}
+
 ------------------------------------------------------------------------------------------------------------------------
 
 
 
-------------------------------------------------------------------------------------------------------------------------
-future.event.css:
-
-table {
-  width: 38%;
-  float: left;
-  margin-right: 15px;
-  margin-left: 10%;
-}
-
-.table-name {
-  text-align: center;
-  color: white;
-  background-color: #0059a1;
-}
-------------------------------------------------------------------------------------------------------------------------
-
-
-------------------------------------------------------------------------------------------------------------------------
-past.event.css:
-
-table {
-  width: 38%;
-  float: left;
-}
-
-.table-name {
-  text-align: center;
-  color: white;
-  background-color: #0059a1;
-}
-------------------------------------------------------------------------------------------------------------------------
-
-
-<label for="additionalInfo">additionalInfo:</label>
-  <input id="additionalInfo" type="text" formControlName="additionalInfo" size="30"><br><br>
 
 
 
-------------------------------------------------------------------------------------------------------------------------
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px;
-  max-width: 76.8%;
-  margin-left: 10%;
-  background-color: #373738;
-  margin-bottom: 30px;
-  padding-bottom: 150px;
-  color: white;
-}
-
-.footer-rows {
-
-}
 
 
-.mat-toolbar-row {
-  justify-content: center;
 
-}
 
-.homepage-button {
-  background-color: #0059a1;
-  color: white;
-  padding: 21px;
-  border: white;
-  text-align: center;
-  margin-left: 120px;
-  box-shadow: 4px 4px 4px #999;
-}
 
-.add-event-button {
-  background-color: white;
-  padding: 21px;
-  border: white;
-  margin-left: 10px;
-  box-shadow: 4px 4px 4px #999;
-}
-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

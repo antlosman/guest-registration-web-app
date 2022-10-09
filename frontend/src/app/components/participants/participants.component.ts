@@ -41,6 +41,18 @@ export class ParticipantsComponent implements OnInit {
     this.router.navigate(['update-privateClient-by-id', id])
   }
 
+  // deletePrivateClient(id: number) {
+  //   this.eventParticipantsService.deletePrivateClient(id).subscribe()
+  // }
+
+  onDeletePrivateClient(id: any) {
+    console.log("id", id)
+    this.eventParticipantsService.deletePrivateClient(id).subscribe((data: any) => {
+      console.log(data)
+      this.event.eventParticipant = data
+    })
+  }
+
   privateClientForm = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.nullValidator]],
     lastName: ['', [Validators.required, Validators.nullValidator]],
