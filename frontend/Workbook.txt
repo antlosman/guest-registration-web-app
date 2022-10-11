@@ -5,9 +5,9 @@ Teie proovitöö läbis hindamise ning hindaja tagasiside oli järgmine:
 
 + Vormi valideerimine (front ja back-end mõlemad)
 
-Fikseeritud makseviiside valik, andmebaasist lugemine
++ Fikseeritud makseviiside valik, andmebaasist lugemine
 
-Salvestatud olemite muutmine
++ Salvestatud olemite muutmine
 
 +? Vormi saatmisel tagasiside (redirect, veateade)
 
@@ -129,7 +129,6 @@ public class EventController {
         this.privateClientService = privateClientService;
     }
 
-    // TODO: change method name to createNewEvent
     @PostMapping
     public EventDTO createNewPost(@RequestBody @Valid EventDTO toStore) {
         log.info("Trying to store new post: [{}]", toStore);

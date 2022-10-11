@@ -45,4 +45,6 @@ public class Event {
     )
     List<PrivateClient> eventPrivateClients = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    List<BusinessClient> businessClients;
 }

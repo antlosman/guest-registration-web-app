@@ -3,7 +3,6 @@ package com.guestregistration.guestregistrationwebapp.service;
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -23,10 +22,10 @@ class EventServiceTest {
 
     private EventService underTest;
 
-    @BeforeEach
-    void setUp() {
-        underTest = new EventService(eventRepository, eventConverter, privateClientRepository );
-    }
+//    @BeforeEach
+//    void setUp() {
+//        underTest = new EventService(eventRepository, eventConverter, privateClientRepository );
+//    }
 
     @Test
     void canGetAllEvents() {

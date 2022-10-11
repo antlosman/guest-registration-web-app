@@ -48,7 +48,7 @@ public class PrivateClientController {
 
     @GetMapping("/find-private-client-by-id/{privateClientId}")
     public Optional<PrivateClient> findPrivateClientById(@PathVariable Long privateClientId) {
-        log.info("Trying to find event by id...");
+        log.info("Trying to find private client by id...");
         return privateClientService.getPrivateClientById(privateClientId);
     }
 
@@ -58,7 +58,7 @@ public class PrivateClientController {
             @PathVariable Long id,
             @RequestBody PrivateClient privateClientToUpdate){
         PrivateClient privateClient = privateClientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not exist with id :" + id));
+                .orElseThrow(() -> new RuntimeException("Private client not exist with id :" + id));
 
         privateClient.setFirstName(privateClientToUpdate.getFirstName());
         privateClient.setLastName(privateClientToUpdate.getLastName());

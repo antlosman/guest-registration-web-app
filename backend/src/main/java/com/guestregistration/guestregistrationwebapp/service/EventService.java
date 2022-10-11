@@ -3,6 +3,7 @@ package com.guestregistration.guestregistrationwebapp.service;
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
+import com.guestregistration.guestregistrationwebapp.repository.BusinessClientRepository;
 import com.guestregistration.guestregistrationwebapp.repository.EventRepository;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,14 +20,18 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final EventConverter eventConverter;
-
     private final PrivateClientRepository privateClientRepository;
+    private final BusinessClientRepository businessClientRepository;
 
 
-    public EventService(EventRepository eventRepository, EventConverter eventConverter, PrivateClientRepository clientRepository) {
+    public EventService(EventRepository eventRepository,
+                        EventConverter eventConverter,
+                        PrivateClientRepository clientRepository,
+                        BusinessClientRepository businessClientRepository) {
         this.eventRepository = eventRepository;
         this.eventConverter = eventConverter;
         this.privateClientRepository = clientRepository;
+        this.businessClientRepository = businessClientRepository;
     }
 
     public EventDTO createNewEvent(EventDTO toStore) {
@@ -78,6 +83,15 @@ public class EventService {
         var privateClient = privateClientRepository.findById(privateClientId).get();
         event.getEventPrivateClients().add(privateClient);
         log.info("New private client successfully added to event: [{}]", event);
+        return eventRepository.save(event);
+    }
+
+    public Event addBusinessClientToEvent(Long eventId, Long businessClientId) {
+        log.debug("Adding new business client to event...");
+        var event = eventRepository.findById(eventId).get();
+        var businessClient = businessClientRepository.findById(businessClientId).get();
+        event.getBusinessClients().add(businessClient);
+        log.info("New business client successfully added to event: [{}]", event);
         return eventRepository.save(event);
     }
 

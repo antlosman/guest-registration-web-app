@@ -4,7 +4,6 @@ import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
-import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
 import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +70,16 @@ public class EventController {
         return eventConverter.fromEntityToDto(event);
     }
 
+    @PutMapping("/{eventID}/business-clients/{businessClientID}")
+    public EventDTO assignBusinessClientToEvent(
+            @PathVariable Long eventID,
+            @PathVariable Long businessClientID
+    ) {
+        log.info("Trying to add business client to event...");
+        Event event = eventService.addBusinessClientToEvent(eventID, businessClientID);
+        return eventConverter.fromEntityToDto(event);
+    }
+
     @GetMapping("/findEventById/{eventID}")
     public Optional<Event> findEventById(
             @PathVariable Long eventID
@@ -79,6 +88,7 @@ public class EventController {
         return eventService.getEvent(eventID);
     }
 
+    // TODO: 11.10.2022 : delete this method from event controller?
     @PostMapping("/private-client")
     public PrivateClientDTO createNewPrivateClient(@RequestBody PrivateClientDTO toStore) {
         log.info("Trying to store new private client: [{}]", toStore);
