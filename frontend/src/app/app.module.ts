@@ -21,13 +21,15 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ParticipantsComponent } from './components/participants/participants.component';
 import { UpdatePrivateClientComponent } from './components/update-private-client/update-private-client.component';
 import {MatSelectModule} from "@angular/material/select";
+import { UpdateBusinessClientComponent } from './components/update-business-client/update-business-client.component';
 
 const routes: Routes = [
   {path: 'homepage', component: HomeComponent},
   {path: 'add-event', component: EventFormComponent},
   {path: 'futureEvent/:id', component: ParticipantsComponent},
   {path: '', component: HomeComponent},
-  {path: 'update-privateClient-by-id/:id', component: UpdatePrivateClientComponent}
+  {path: 'update-privateClient-by-id/:id', component: UpdatePrivateClientComponent},
+  {path: 'update-businessClient-by-id/:id', component: UpdateBusinessClientComponent}
 ];
 
 @NgModule({
@@ -40,7 +42,8 @@ const routes: Routes = [
     EventFormComponent,
     HomeComponent,
     ParticipantsComponent,
-    UpdatePrivateClientComponent
+    UpdatePrivateClientComponent,
+    UpdateBusinessClientComponent
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,23 @@
+
+<div class="participant-form-table">
+  <form [formGroup]="businessClientForm" (ngSubmit)="onSubmit()">
+    <h1>Add new business client</h1>
+    <label for="companyName">Company name:</label>
+    <input id="companyName" type="text" [(ngModel)]="businessClient.companyName" formControlName="companyName" size="30"><br><br>
+
+    <label for="registerCode">Register code:</label>
+    <input id="registerCode" type="text" [(ngModel)]="businessClient.registerCode" formControlName="registerCode" size="30"><br><br>
+
+    <label for="participantsQuantity">Participants:</label>
+    <input id="participantsQuantity" type="text" [(ngModel)]="businessClient.participantsQuantity" formControlName="participantsQuantity" size="30"><br><br>
+
+    <label for="bClientPaymentMethod">Payment:</label>
+    <input id="bClientPaymentMethod" type="text" [(ngModel)]="businessClient.paymentMethod" formControlName="bClientPaymentMethod" size="30"><br><br>
+
+
+    <label for="additionalInfo">Additional info:</label>
+    <textarea id="additionalInfo" rows="7" cols="30" [(ngModel)]="businessClient.additionalInfo" formControlName="additionalInfo"></textarea><br><br>
+
+    <button [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+  </form>
+</div>

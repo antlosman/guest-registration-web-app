@@ -1,0 +1,48 @@
+h1 {
+  color: #0059a1;
+  margin-top: 20px;
+}
+
+.container {
+  margin-left: 250px;
+}
+
+.participants-table {
+  margin-left: 350px;
+}
+
+.participant-form-table {
+  margin-left: 250px;
+  float: left;
+}
+
+label {
+  float: left;
+  clear: right;
+}
+
+input {
+  float: right;
+  margin-left: 10px;
+}
+
+textarea {
+  float: right;
+  margin-left: 10px;
+}
+
+button {
+  margin-top: 45px;
+}
+
+select {
+  float: right;
+  margin-left: 15px;
+  width: 239px;
+  overflow:hidden;
+}
+
+
+
+
+

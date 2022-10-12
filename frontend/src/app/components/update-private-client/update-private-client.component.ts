@@ -19,20 +19,12 @@ export class UpdatePrivateClientComponent implements OnInit {
     private formBuilder: FormBuilder)
 { }
 
-
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
     this.eventParticipantsService.getPrivateClientById(this.id).subscribe(data =>{
       this.privateClient = data
     }, error => console.log(error))
   }
-
-  // ngOnInit(): void {
-  //   this.id = this.route.snapshot.params['id']
-  //   this.privateClient = this.eventParticipantsService.getPrivateClientById(this.id).subscribe(
-  //     data => {this.privateClient = data}, error => console.log(error)
-  //   )
-  // }
 
   privateClientForm = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.nullValidator]],

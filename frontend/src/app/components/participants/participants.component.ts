@@ -41,9 +41,9 @@ export class ParticipantsComponent implements OnInit {
     this.router.navigate(['update-privateClient-by-id', id])
   }
 
-  // deletePrivateClient(id: number) {
-  //   this.eventParticipantsService.deletePrivateClient(id).subscribe()
-  // }
+  updateBusinessClient(id: number) {
+    this.router.navigate(['update-businessClient-by-id', id])
+  }
 
   onDeletePrivateClient(id: any) {
     console.log("id", id)
@@ -73,8 +73,8 @@ export class ParticipantsComponent implements OnInit {
     companyName: ['', [Validators.required, Validators.nullValidator]],
     registerCode: ['', [Validators.required, Validators.nullValidator]],
     participantsQuantity: ['', [Validators.required, Validators.min(1)]],
-    bClientPaymentMethod: [''],
-    bClientAdditionalInfo: ['']
+    paymentMethod: [''],
+    additionalInfo: ['']
   })
 
   onFormSubmit() {
@@ -122,8 +122,8 @@ export class ParticipantsComponent implements OnInit {
       companyName: this.businessClientForm.value.companyName,
       registerCode: this.businessClientForm.value.registerCode,
       participantsQuantity: this.businessClientForm.value.participantsQuantity,
-      bClientPaymentMethod: this.businessClientForm.value.paymentMethod,
-      bClientAdditionalInfo: this.businessClientForm.value.additionalInfo
+      paymentMethod: this.businessClientForm.value.paymentMethod,
+      additionalInfo: this.businessClientForm.value.additionalInfo
     }
 
     this.eventParticipantsService.createNewBusinessClient(event).subscribe((data => {

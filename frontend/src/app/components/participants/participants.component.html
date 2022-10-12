@@ -47,7 +47,7 @@
       <td>{{item.additionalInfo}} </td>
 
       <td>
-        <button (click)="updatePrivateClient(item.id)" class="mat-button"> Update </button>
+        <button (click)="updateBusinessClient(item.id)" class="mat-button"> Update </button>
         <button (click)="onDeleteBusinessClient(item.id)" class="mat-button"> Delete </button>
       </td>
     </tr>
@@ -95,14 +95,14 @@
     <label for="participantsQuantity">Participants:</label>
     <input id="participantsQuantity" type="text" formControlName="participantsQuantity" size="30"><br><br>
 
-    <label for="bClientPaymentMethod">Payment:</label>
-    <select id="bClientPaymentMethod" formControlName="bClientPaymentMethod">
+    <label for="paymentMethod">Payment:</label>
+    <select id="bClientPaymentMethod" formControlName="paymentMethod">
       <option value="CASH">Cash</option>
       <option value="CARD">Card</option>
     </select><br><br>
 
-    <label for="bClientAdditionalInfo">Additional info:</label>
-    <textarea id="bClientAdditionalInfo" rows="7" cols="30" formControlName="bClientAdditionalInfo"></textarea><br><br>
+    <label for="additionalInfo">Additional info:</label>
+    <textarea id="bClientAdditionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
 
     <button [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
   </form>
