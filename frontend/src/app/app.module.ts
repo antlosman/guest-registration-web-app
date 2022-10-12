@@ -22,6 +22,7 @@ import { ParticipantsComponent } from './components/participants/participants.co
 import { UpdatePrivateClientComponent } from './components/update-private-client/update-private-client.component';
 import {MatSelectModule} from "@angular/material/select";
 import { UpdateBusinessClientComponent } from './components/update-business-client/update-business-client.component';
+import { PastEventParticipantsComponent } from './components/past-event-participants/past-event-participants.component';
 
 const routes: Routes = [
   {path: 'homepage', component: HomeComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'futureEvent/:id', component: ParticipantsComponent},
   {path: '', component: HomeComponent},
   {path: 'update-privateClient-by-id/:id', component: UpdatePrivateClientComponent},
-  {path: 'update-businessClient-by-id/:id', component: UpdateBusinessClientComponent}
+  {path: 'update-businessClient-by-id/:id', component: UpdateBusinessClientComponent},
+  {path: 'pastEvent/:id', component: PastEventParticipantsComponent}
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const routes: Routes = [
     HomeComponent,
     ParticipantsComponent,
     UpdatePrivateClientComponent,
-    UpdateBusinessClientComponent
+    UpdateBusinessClientComponent,
+    PastEventParticipantsComponent
   ],
     imports: [
         BrowserModule,

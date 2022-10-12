@@ -20,7 +20,7 @@ export class PastEventsComponent implements OnInit {
       .subscribe(value => {this.futureEvents = value});
   }
 
-  displayedColumns: string[] = ['id', 'name', 'date', 'p-quantity'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'participants'];
   groupedColumns: string[] = ['grouped'];
 
 }

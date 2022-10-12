@@ -23,6 +23,8 @@
 </table>
 </div>
 
+<!--Private clients list-->
+
 <div class="participants-table">
 <table>
   <tr *ngFor="let item of event?.eventPrivateClients">
@@ -37,6 +39,8 @@
   </tr>
 </table>
 </div>
+
+<!--Business clients list-->
 
 <div class="participants-table">
   <table>
@@ -54,59 +58,67 @@
   </table>
 </div>
 
+<div class="row">
+
+ <div class="column">
 <!--Private client adding form-->
 
-<div class="participant-form-table">
-<form [formGroup]="privateClientForm" (ngSubmit)="onFormSubmit()">
-  <h1>Add new participant</h1>
-  <label for="firstName">First name:</label>
-  <input id="firstName" type="text" formControlName="firstName" size="30"><br><br>
+    <div class="participant-form-table">
+      <form [formGroup]="privateClientForm" (ngSubmit)="onFormSubmit()">
+        <h1>Add new participant</h1>
+        <label for="firstName">First name:</label>
+        <input id="firstName" type="text" formControlName="firstName" size="30"><br><br>
 
-  <label for="lastName">Last name:</label>
-  <input id="lastName" type="text" formControlName="lastName" size="30"><br><br>
+        <label for="lastName">Last name:</label>
+        <input id="lastName" type="text" formControlName="lastName" size="30"><br><br>
 
-  <label for="idNumber">Id number:</label>
-  <input id="idNumber" type="text" formControlName="idNumber" size="30"><br><br>
+        <label for="idNumber">Id number:</label>
+        <input id="idNumber" type="text" formControlName="idNumber" size="30"><br><br>
 
-  <label for="paymentMethod">Payment:</label>
-  <select id="paymentMethod" formControlName="paymentMethod">
-    <option value="CASH">Cash</option>
-    <option value="CARD">Card</option>
-  </select><br><br>
+        <label for="paymentMethod">Payment:</label>
+        <select id="paymentMethod" formControlName="paymentMethod">
+          <option value="CASH">Cash</option>
+          <option value="CARD">Card</option>
+        </select><br><br>
 
-  <label for="additionalInfo">Additional info:</label>
-  <textarea id="additionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
+        <label for="additionalInfo">Additional info:</label>
+        <textarea id="additionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
 
-  <button [disabled]="!privateClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
-</form>
-</div>
+        <button [disabled]="!privateClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+      </form>
+      </div>
+  </div>
 
+ <div class="column">
 <!--Business client adding form-->
 
-<div class="participant-form-table">
-  <form [formGroup]="businessClientForm" (ngSubmit)="onBusinessClientFormSubmit()">
-    <h1>Add new business client</h1>
-    <label for="companyName">Company name:</label>
-    <input id="companyName" type="text" formControlName="companyName" size="30"><br><br>
+    <div class="participant-form-table">
+      <form [formGroup]="businessClientForm" (ngSubmit)="onBusinessClientFormSubmit()">
+        <h1>Add new business client</h1>
+        <label for="companyName">Company name:</label>
+        <input id="companyName" type="text" formControlName="companyName" size="30"><br><br>
 
-    <label for="registerCode">Register code:</label>
-    <input id="registerCode" type="text" formControlName="registerCode" size="30"><br><br>
+        <label for="registerCode">Register code:</label>
+        <input id="registerCode" type="text" formControlName="registerCode" size="30"><br><br>
 
-    <label for="participantsQuantity">Participants:</label>
-    <input id="participantsQuantity" type="text" formControlName="participantsQuantity" size="30"><br><br>
+        <label for="participantsQuantity">Participants:</label>
+        <input id="participantsQuantity" type="text" formControlName="participantsQuantity" size="30"><br><br>
 
-    <label for="paymentMethod">Payment:</label>
-    <select id="bClientPaymentMethod" formControlName="paymentMethod">
-      <option value="CASH">Cash</option>
-      <option value="CARD">Card</option>
-    </select><br><br>
+        <label for="paymentMethod">Payment:</label>
+        <select id="bClientPaymentMethod" formControlName="paymentMethod">
+          <option value="CASH">Cash</option>
+          <option value="CARD">Card</option>
+        </select><br><br>
 
-    <label for="additionalInfo">Additional info:</label>
-    <textarea id="bClientAdditionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
+        <label for="additionalInfo">Additional info:</label>
+        <textarea id="bClientAdditionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
 
-    <button [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
-  </form>
+        <button [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+      </form>
+    </div>
+
+ </div>
+
 </div>
-
 
 <app-footer></app-footer>
