@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { EventParticipantsService } from "../../services/event-participants.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {EventParticipantsService} from "../../services/event-participants.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
+import {PaymentMethod} from "../../enums/payment-method";
 
 @Component({
   selector: 'app-participants',
@@ -13,6 +14,8 @@ export class ParticipantsComponent implements OnInit {
 
   eventId: any;
   event: any;
+  cash: string = 'CASH'
+
 
   isValidFormSubmitted = false;
 
