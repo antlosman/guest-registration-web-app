@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
-import {BACKEND_PAST_EVENTS} from "../constants/constant";
+import {BACKEND_DELETE_EVENT_BY_ID, BACKEND_PAST_EVENTS} from "../constants/constant";
 import {Event} from "../models/event";
 
 @Injectable({
@@ -27,5 +27,9 @@ export class PastEventsServiceService {
       ).subscribe();
 
     return this.http.get<Array<Event>>(BACKEND_PAST_EVENTS)
+  }
+
+  deleteEvent(id: number): Observable<void> {
+    return this.http.delete<void>(`${BACKEND_DELETE_EVENT_BY_ID}/${id}`)
   }
 }

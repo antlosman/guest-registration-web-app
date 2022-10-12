@@ -20,7 +20,12 @@ export class PastEventsComponent implements OnInit {
       .subscribe(value => {this.futureEvents = value});
   }
 
-  displayedColumns: string[] = ['id', 'name', 'date', 'participants'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'participants', "actions"];
   groupedColumns: string[] = ['grouped'];
+
+  onDeletePrivateClient(id: any) {
+    console.log("id", id)
+    this.pastEventService.deleteEvent(id).subscribe(_value => {this.ngOnInit()});
+  }
 
 }
