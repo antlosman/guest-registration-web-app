@@ -45,6 +45,11 @@ public class Event {
     )
     List<PrivateClient> eventPrivateClients = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    List<BusinessClient> businessClients;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "event_business_clients",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "business_client_id")
+    )
+    List<BusinessClient> eventBusinessClients = new ArrayList<>();
 }

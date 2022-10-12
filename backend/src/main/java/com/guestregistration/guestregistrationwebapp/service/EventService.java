@@ -90,7 +90,7 @@ public class EventService {
         log.debug("Adding new business client to event...");
         var event = eventRepository.findById(eventId).get();
         var businessClient = businessClientRepository.findById(businessClientId).get();
-        event.getBusinessClients().add(businessClient);
+        event.getEventBusinessClients().add(businessClient);
         log.info("New business client successfully added to event: [{}]", event);
         return eventRepository.save(event);
     }

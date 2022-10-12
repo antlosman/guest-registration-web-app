@@ -1,6 +1,7 @@
 package com.guestregistration.guestregistrationwebapp.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guestregistration.guestregistrationwebapp.enumeration.PaymentMethod;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -48,6 +52,7 @@ public class BusinessClient {
     @Size(max = 5000)
     private String additionalInfo;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Event events;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "eventBusinessClients", cascade = CascadeType.ALL)
+    private List<Event> events = new ArrayList<>();
 }

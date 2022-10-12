@@ -62,7 +62,7 @@ public class BusinessClientController {
         return ResponseEntity.ok(updatedBusinessClient);
     }
 
-    @DeleteMapping("delete-business-client/{id}")
+    @DeleteMapping("/delete-business-client/{id}")
     public ResponseEntity<BusinessClient> deleteBusinessClient(@PathVariable Long id) {
         businessClientService.deleteBusinessClient(id);
         return new ResponseEntity<>(HttpStatus.OK);
