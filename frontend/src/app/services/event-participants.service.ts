@@ -3,9 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {Event} from "../models/event";
 import {PrivateClient} from "../models/privateClient";
+import {BusinessClient} from "../models/businessClient";
+
 import {
-  BACKEND_CREATE_EVENT, BACKEND_DELETE_PRIVATE_CLIENT_BY_ID,
-  BACKEND_GET_PRIVATE_CLIENT_BY_ID,
+  BACKEND_CREATE_EVENT,
+  BACKEND_CREATE_NEW_BUSINESS_CLIENT, BACKEND_DELETE_BUSINESS_CLIENT_BY_ID,
+  BACKEND_DELETE_PRIVATE_CLIENT_BY_ID,
+  BACKEND_GET_BUSINESS_CLIENT_BY_ID,
+  BACKEND_GET_PRIVATE_CLIENT_BY_ID, BACKEND_UPDATE_BUSINESS_CLIENT_BY_ID,
   BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID
 } from "../constants/constant";
 
@@ -23,41 +28,79 @@ export class EventParticipantsService {
         tap(_ => console.log(`fetched event id=${id}`))
       )
   }
-  // todo: code cleaning
+
   createNewPrivateClient(newEvent: any): Observable<any> {
-    // let payload = {
-    //   id: newEvent.id,
-    //   name: newEvent.name,
-    //   date: newEvent.date,
-    //   participantsQuantity: newEvent.participantsQuantity
-    // }
-   // console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+    let payload = {
+      id: newEvent.id,
+      name: newEvent.name,
+      date: newEvent.date,
+      participantsQuantity: newEvent.participantsQuantity
+    }
+    console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
 
     return this.http.post("http://localhost:8080/events/private-client", newEvent)
   }
 
+  createNewBusinessClient(newEvent: any): Observable<any> {
+    let payload = {
+      id: newEvent.id,
+      name: newEvent.name,
+      date: newEvent.date,
+      participantsQuantity: newEvent.participantsQuantity
+    }
+    console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+
+    return this.http.post(BACKEND_CREATE_NEW_BUSINESS_CLIENT, newEvent)
+  }
+
   mapping(newEvent: any, id: any): Observable<any> {
-    // let payload = {
-    //   id: newEvent.id,
-    //   name: newEvent.name,
-    //   date: newEvent.date,
-    //   participantsQuantity: newEvent.participantsQuantity
-    // }
-    // console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+    let payload = {
+      id: newEvent.id,
+      name: newEvent.name,
+      date: newEvent.date,
+      participantsQuantity: newEvent.participantsQuantity
+    }
+    console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
 
     return  this.http.put("http://localhost:8080/events/"+ newEvent +"/private-clients/"+id, {})
+  }
+
+  mappingBusinessClient(newEvent: any, id: any): Observable<any> {
+    let payload = {
+      id: newEvent.id,
+      name: newEvent.name,
+      date: newEvent.date,
+      participantsQuantity: newEvent.participantsQuantity
+    }
+    console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
+
+    return  this.http.put("http://localhost:8080/events/"+ newEvent +"/business-clients/"+id, {})
   }
 
   getPrivateClientById(id: number): Observable<PrivateClient> {
     return this.http.get<PrivateClient>(`${BACKEND_GET_PRIVATE_CLIENT_BY_ID}/${id}`)
   }
 
+  getBusinessClientByID(id: number): Observable<BusinessClient> {
+    return this.http.get<BusinessClient>(`${BACKEND_GET_BUSINESS_CLIENT_BY_ID}/${id}`)
+  }
+
   updatePrivateClient(id: number, privateClient: PrivateClient): Observable<any> {
     return this.http.put(`${BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID}/${id}`, privateClient)
+  }
+
+  updateBusinessClient(id: number, businessClient: BusinessClient): Observable<any> {
+    return this.http.put(`${BACKEND_UPDATE_BUSINESS_CLIENT_BY_ID}/${id}`, businessClient)
   }
 
   deletePrivateClient(id: number): Observable<void> {
     return this.http.delete<void>(`${BACKEND_DELETE_PRIVATE_CLIENT_BY_ID}/${id}`)
   }
+
+  deleteBusinessClient(id: number): Observable<void> {
+    return this.http.delete<void>(`${BACKEND_DELETE_BUSINESS_CLIENT_BY_ID}/${id}`)
+  }
+
+
 
 }

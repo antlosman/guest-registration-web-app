@@ -8,3 +8,7 @@ export const BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/priva
 export const BACKEND_GET_PRIVATE_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/private-clients/find-private-client-by-id`
 export const BACKEND_DELETE_PRIVATE_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/private-clients/delete-private-client`
 export const BACKEND_DELETE_EVENT_BY_ID = `${BACKEND_CONFIG_ROOT}/events/delete-event`
+export const BACKEND_CREATE_NEW_BUSINESS_CLIENT = `${BACKEND_CONFIG_ROOT}/business-clients`
+export const BACKEND_GET_BUSINESS_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/business-clients/find-business-client-by-id`
+export const BACKEND_UPDATE_BUSINESS_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/business-clients/update-business-client-by-id`
+export const BACKEND_DELETE_BUSINESS_CLIENT_BY_ID = `${BACKEND_CONFIG_ROOT}/business-clients/delete-business-client`
