@@ -4,7 +4,7 @@ export interface BusinessClient {
   id: number,
   companyName: string,
   registerCode: number,
-  participantQuantity: number,
+  participantsQuantity: number,
   paymentMethod: PaymentMethod,
   additionalInfo: string
 }

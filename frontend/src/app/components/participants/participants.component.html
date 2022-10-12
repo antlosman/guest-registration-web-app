@@ -38,6 +38,24 @@
 </table>
 </div>
 
+<div class="participants-table">
+  <table>
+    <tr *ngFor="let item of event?.eventBusinessClients">
+      <td>{{item.companyName}} </td>
+      <td>{{item.registerCode}} </td>
+      <td>Participants: {{item.participantsQuantity}} </td>
+      <td>{{item.additionalInfo}} </td>
+
+      <td>
+        <button (click)="updatePrivateClient(item.id)" class="mat-button"> Update </button>
+        <button (click)="onDeletePrivateClient(item.id)" class="mat-button"> Delete </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--Private client adding form-->
+
 <div class="participant-form-table">
 <form [formGroup]="privateClientForm" (ngSubmit)="onFormSubmit()">
   <h1>Add new participant</h1>
@@ -62,5 +80,33 @@
   <button [disabled]="!privateClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
 </form>
 </div>
+
+<!--Business client adding form-->
+
+<div class="participant-form-table">
+  <form [formGroup]="businessClientForm" (ngSubmit)="onBusinessClientFormSubmit()">
+    <h1>Add new business client</h1>
+    <label for="companyName">Company name:</label>
+    <input id="companyName" type="text" formControlName="companyName" size="30"><br><br>
+
+    <label for="registerCode">Register code:</label>
+    <input id="registerCode" type="text" formControlName="registerCode" size="30"><br><br>
+
+    <label for="participantsQuantity">Participants:</label>
+    <input id="participantsQuantity" type="text" formControlName="participantsQuantity" size="30"><br><br>
+
+    <label for="bClientPaymentMethod">Payment:</label>
+    <select id="bClientPaymentMethod" formControlName="bClientPaymentMethod">
+      <option value="CASH">Cash</option>
+      <option value="CARD">Card</option>
+    </select><br><br>
+
+    <label for="bClientAdditionalInfo">Additional info:</label>
+    <textarea id="bClientAdditionalInfo" rows="7" cols="30" formControlName="bClientAdditionalInfo"></textarea><br><br>
+
+    <button [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+  </form>
+</div>
+
 
 <app-footer></app-footer>

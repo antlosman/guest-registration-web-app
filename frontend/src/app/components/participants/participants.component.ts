@@ -61,6 +61,14 @@ export class ParticipantsComponent implements OnInit {
     additionalInfo: ['']
   })
 
+  businessClientForm = this.formBuilder.group({
+    companyName: ['', [Validators.required, Validators.nullValidator]],
+    registerCode: ['', [Validators.required, Validators.nullValidator]],
+    participantsQuantity: ['', [Validators.required, Validators.min(1)]],
+    bClientPaymentMethod: [''],
+    bClientAdditionalInfo: ['']
+  })
+
   onFormSubmit() {
     console.log("On submitting whole post...")
     console.log(`Value from form: [${JSON.stringify(this.privateClientForm.value)}]`)
@@ -90,6 +98,37 @@ export class ParticipantsComponent implements OnInit {
     )
 
     this.privateClientForm.reset()
+  }
+
+  onBusinessClientFormSubmit() {
+    console.log("On submitting whole form...")
+    console.log(`Value from form: [${JSON.stringify(this.businessClientForm.value)}]`)
+
+    if (this.businessClientForm.invalid) {
+      return;
+    }
+
+    this.isValidFormSubmitted = true;
+
+    let event: any = {
+      companyName: this.businessClientForm.value.companyName,
+      registerCode: this.businessClientForm.value.registerCode,
+      participantsQuantity: this.businessClientForm.value.participantsQuantity,
+      bClientPaymentMethod: this.businessClientForm.value.paymentMethod,
+      bClientAdditionalInfo: this.businessClientForm.value.additionalInfo
+    }
+
+    this.eventParticipantsService.createNewBusinessClient(event).subscribe((data => {
+
+        console.log(data)
+        this.eventParticipantsService.mappingBusinessClient(this.eventId, data.id).subscribe(( _data => {
+            console.log(this.event)
+          })
+        )
+      })
+    )
+
+    this.businessClientForm.reset()
   }
 
 }
