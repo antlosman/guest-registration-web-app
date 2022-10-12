@@ -53,6 +53,14 @@ export class ParticipantsComponent implements OnInit {
     })
   }
 
+  onDeleteBusinessClient(id: any) {
+    console.log("id", id)
+    this.eventParticipantsService.deleteBusinessClient(id).subscribe((data: any) => {
+      console.log(data)
+      this.event.eventParticipant = data
+    })
+  }
+
   privateClientForm = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.nullValidator]],
     lastName: ['', [Validators.required, Validators.nullValidator]],
