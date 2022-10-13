@@ -33,7 +33,7 @@ participant component:
  - automatic page refresh when new client added
 
 todo backend:
- - 
+ - client delete feature deletes also event
 
 
 

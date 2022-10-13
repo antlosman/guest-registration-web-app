@@ -52,7 +52,7 @@ public class PrivateClientController {
         return privateClientService.getPrivateClientById(privateClientId);
     }
 
-    //todo: do logic in service
+    // TODO: 13.10.2022 logic should be in service
     @PutMapping("/update-private-client-by-id/{id}")
     public ResponseEntity<PrivateClient> updatePrivateClientById(
             @PathVariable Long id,

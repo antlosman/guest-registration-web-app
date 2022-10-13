@@ -2,7 +2,6 @@ package com.guestregistration.guestregistrationwebapp.controller;
 
 import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
-import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
 import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
@@ -25,17 +24,13 @@ public class EventController {
 
     private final EventConverter eventConverter;
 
-    private final PrivateClientService privateClientService;
-
-    public EventController(EventService eventService, EventConverter eventConverter, PrivateClientService privateClientService) {
+    public EventController(EventService eventService, EventConverter eventConverter) {
         this.eventService = eventService;
         this.eventConverter = eventConverter;
-        this.privateClientService = privateClientService;
     }
 
-    // TODO: change method name to createNewEvent
     @PostMapping
-    public EventDTO createNewPost(@RequestBody @Valid EventDTO toStore) {
+    public EventDTO createNewEvent(@RequestBody @Valid EventDTO toStore) {
         log.info("Trying to store new post: [{}]", toStore);
         return eventService.createNewEvent(toStore);
     }
@@ -86,13 +81,6 @@ public class EventController {
     ) {
         log.info("Trying to find event by id...");
         return eventService.getEvent(eventID);
-    }
-
-    // TODO: 11.10.2022 : delete this method from event controller?
-    @PostMapping("/private-client")
-    public PrivateClientDTO createNewPrivateClient(@RequestBody PrivateClientDTO toStore) {
-        log.info("Trying to store new private client: [{}]", toStore);
-        return privateClientService.createNewPrivateClient(toStore);
     }
 
     @DeleteMapping("/delete-event/{id}")
