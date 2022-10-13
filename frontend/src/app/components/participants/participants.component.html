@@ -65,7 +65,7 @@
 
     <div class="participant-form-table">
       <form [formGroup]="privateClientForm" (ngSubmit)="onFormSubmit()">
-        <h1>Add new participant</h1>
+        <h1>Add new Private Client</h1>
         <label for="firstName">First name:</label>
         <input id="firstName" type="text" formControlName="firstName" size="30"><br><br>
 
@@ -94,7 +94,7 @@
 
     <div class="participant-form-table">
       <form [formGroup]="businessClientForm" (ngSubmit)="onBusinessClientFormSubmit()">
-        <h1>Add new business client</h1>
+        <h1>Add new Business Client</h1>
         <label for="companyName">Company name:</label>
         <input id="companyName" type="text" formControlName="companyName" size="30"><br><br>
 
@@ -113,7 +113,7 @@
         <label for="additionalInfo">Additional info:</label>
         <textarea id="bClientAdditionalInfo" rows="7" cols="30" formControlName="additionalInfo"></textarea><br><br>
 
-        <button [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
+        <button class="business-client-submit-button" [disabled]="!businessClientForm.valid" type="submit" mat-raised-button>Save Client</button><br><br>
       </form>
     </div>
 

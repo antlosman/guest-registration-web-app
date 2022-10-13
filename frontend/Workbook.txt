@@ -23,7 +23,17 @@ Kasutada spring raamistiku võimalusi rakenduse confimisel (cors filter)
 
 Ürituse detailvaate komponent võiks näidata ka vanade ürituste osalejaid
 
+todo frontend:
+participant component:
+ - save client button css
+ - update private/business client save client button css
+ - homepage, delete row (name, date, participant, actions) + tables fix size (e.g. 4 rows)
+ - nice footer
+ - add "back" buttons
+ - automatic page refresh when new client added
 
+todo backend:
+ - 
 
 
 

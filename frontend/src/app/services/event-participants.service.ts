@@ -10,8 +10,8 @@ import {
   BACKEND_CREATE_NEW_BUSINESS_CLIENT, BACKEND_DELETE_BUSINESS_CLIENT_BY_ID,
   BACKEND_DELETE_PRIVATE_CLIENT_BY_ID,
   BACKEND_GET_BUSINESS_CLIENT_BY_ID,
-  BACKEND_GET_PRIVATE_CLIENT_BY_ID, BACKEND_UPDATE_BUSINESS_CLIENT_BY_ID,
-  BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID
+  BACKEND_GET_PRIVATE_CLIENT_BY_ID, PRIVATE_CLIENTS_URL, BACKEND_UPDATE_BUSINESS_CLIENT_BY_ID,
+  BACKEND_UPDATE_PRIVATE_CLIENT_BY_ID, BUSINESS_CLIENTS_URL, BACKEND_CREATE_NEW_PRIVATE_CLIENT, BACKEND_FIND_EVENT_BY_ID
 } from "../constants/constant";
 
 @Injectable({
@@ -23,7 +23,7 @@ export class EventParticipantsService {
 
 
   getEventById(id: number): Observable<Event> {
-    return this.http.get<Event>('http://localhost:8080/events/findEventById/' + id)
+    return this.http.get<Event>(BACKEND_FIND_EVENT_BY_ID + id)
       .pipe(
         tap(_ => console.log(`fetched event id=${id}`))
       )
@@ -38,7 +38,7 @@ export class EventParticipantsService {
     }
     console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
 
-    return this.http.post("http://localhost:8080/events/private-client", newEvent)
+    return this.http.post(BACKEND_CREATE_NEW_PRIVATE_CLIENT, newEvent)
   }
 
   createNewBusinessClient(newEvent: any): Observable<any> {
@@ -62,7 +62,7 @@ export class EventParticipantsService {
     }
     console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
 
-    return  this.http.put("http://localhost:8080/events/"+ newEvent +"/private-clients/"+id, {})
+    return  this.http.put(BACKEND_CREATE_EVENT + newEvent + PRIVATE_CLIENTS_URL + id, {})
   }
 
   mappingBusinessClient(newEvent: any, id: any): Observable<any> {
@@ -74,7 +74,7 @@ export class EventParticipantsService {
     }
     console.log(`Trying to send to backend new event: [${newEvent}] as payload [${JSON.stringify(payload)}`)
 
-    return  this.http.put("http://localhost:8080/events/"+ newEvent +"/business-clients/"+id, {})
+    return  this.http.put(BACKEND_CREATE_EVENT + newEvent + BUSINESS_CLIENTS_URL +id, {})
   }
 
   getPrivateClientById(id: number): Observable<PrivateClient> {

@@ -10,7 +10,7 @@ import { Event } from "../../models/event";
 })
 export class EventFormComponent {
 
-  unamePattern = "^\\d{4}-\\d{2}-\\d{2}$";
+  datePattern = "^\\d{4}-\\d{2}-\\d{2}$";
   isValidFormSubmitted = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -18,7 +18,7 @@ export class EventFormComponent {
 
   eventForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.nullValidator]],
-    date: ['', [Validators.required, Validators.pattern(this.unamePattern)]],
+    date: ['', [Validators.required, Validators.pattern(this.datePattern)]],
     participantsQuantity: ['', [Validators.required, Validators.min(1)]]
   })
 

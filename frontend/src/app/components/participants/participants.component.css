@@ -12,7 +12,7 @@ h1 {
 }
 
 .participant-form-table {
-  margin-left: 100px;
+  margin-left: 90px;
   float: left;
 }
 
@@ -29,14 +29,6 @@ input {
 textarea {
   float: right;
   margin-left: 10px;
-}
-
-button {
-  margin-top: 0px;
-}
-
-.mat-raised-button {
-  margin-top: 20px;
 }
 
 select {
