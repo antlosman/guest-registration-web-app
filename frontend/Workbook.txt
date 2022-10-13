@@ -31,6 +31,8 @@ participant component:
  - nice footer
  - add "back" buttons
  - automatic page refresh when new client added
+ - add event feature adds events only to future events table even if it's a past event
+ - update client page, error in console
 
 todo backend:
  - client delete feature deletes also event

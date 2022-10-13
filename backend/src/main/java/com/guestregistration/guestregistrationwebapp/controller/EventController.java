@@ -4,8 +4,9 @@ import com.guestregistration.guestregistrationwebapp.converter.EventConverter;
 import com.guestregistration.guestregistrationwebapp.dto.EventDTO;
 import com.guestregistration.guestregistrationwebapp.entity.Event;
 import com.guestregistration.guestregistrationwebapp.service.EventService;
-import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @RequestMapping("/events")
-@CrossOrigin
 public class EventController {
 
     private final EventService eventService;
