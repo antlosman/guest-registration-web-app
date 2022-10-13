@@ -4,7 +4,9 @@ import com.guestregistration.guestregistrationwebapp.dto.BusinessClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.BusinessClient;
 import com.guestregistration.guestregistrationwebapp.repository.BusinessClientRepository;
 import com.guestregistration.guestregistrationwebapp.service.BusinessClientService;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,6 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @RequestMapping("business-clients")
-@CrossOrigin
 public class BusinessClientController {
 
     private final BusinessClientService businessClientService;

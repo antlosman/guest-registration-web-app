@@ -4,11 +4,12 @@ import com.guestregistration.guestregistrationwebapp.dto.PrivateClientDTO;
 import com.guestregistration.guestregistrationwebapp.entity.PrivateClient;
 import com.guestregistration.guestregistrationwebapp.repository.PrivateClientRepository;
 import com.guestregistration.guestregistrationwebapp.service.PrivateClientService;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,7 +18,6 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @RequestMapping("private-clients")
-@CrossOrigin
 public class PrivateClientController {
 
     private final PrivateClientService privateClientService;
