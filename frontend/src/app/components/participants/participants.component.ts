@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {EventParticipantsService} from "../../services/event-participants.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
-import {PaymentMethod} from "../../enums/payment-method";
 
 @Component({
   selector: 'app-participants',
@@ -103,6 +102,7 @@ export class ParticipantsComponent implements OnInit {
       console.log(data)
         this.eventParticipantsService.mapping(this.eventId, data.id).subscribe(( _data => {
             console.log(this.event)
+            this.getEventByID()
           })
         )
     })
@@ -134,6 +134,7 @@ export class ParticipantsComponent implements OnInit {
         console.log(data)
         this.eventParticipantsService.mappingBusinessClient(this.eventId, data.id).subscribe(( _data => {
             console.log(this.event)
+            this.getEventByID()
           })
         )
       })
