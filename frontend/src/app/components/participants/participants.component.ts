@@ -81,7 +81,7 @@ export class ParticipantsComponent implements OnInit {
   })
 
   onFormSubmit() {
-    console.log("On submitting whole post...")
+    console.log("On submitting whole form...")
     console.log(`Value from form: [${JSON.stringify(this.privateClientForm.value)}]`)
 
     if (this.privateClientForm.invalid) {

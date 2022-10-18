@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { EventFormService } from "../../services/event-form.service";
 import { Event } from "../../models/event";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-event-form',
@@ -14,7 +15,8 @@ export class EventFormComponent {
   isValidFormSubmitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private eventService: EventFormService ) { }
+              private eventService: EventFormService,
+              private router: Router) { }
 
   eventForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.nullValidator]],
@@ -43,6 +45,10 @@ export class EventFormComponent {
     this.eventService.createNewEvent(event);
     this.eventForm.reset();
 
+    this.router.navigate(['homepage'])
+      .then(() => {
+        window.location.reload();
+      });
   }
 
 }
