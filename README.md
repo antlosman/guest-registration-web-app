@@ -16,7 +16,7 @@ PostgreSQL 14.5
 
 ### Home page
 
-User can delete event or check event participants. User also can view all upcoming and past events stored in database.
+User can view all upcoming and past events stored in database, delete event or check event participants.
 
 ### Add event
 
@@ -24,7 +24,7 @@ User can add new event to database.
 
 ### Participants
 
-User can add new private or bisiness client to the event, check participant details and edit them if needed. User can also delete participant from the event.
+User can add new private or business client to the event, check participant details and edit them if needed. User can also delete participant from the event.
 
 ![image](https://user-images.githubusercontent.com/87125898/201975532-72345bdf-d8d6-41bc-99d0-3c6f94eff5c6.png)
 
